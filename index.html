@@ -1,1 +1,193 @@
-Initial Liberator welcome page
+<!DOCTYPE html>
+<!-- HTML5 documentation for liberator -->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Liberator</title>
+    <style>
+      body { background: #fdfdff; color: black; }
+  </style>  
+  </head>
+  <body>
+    <h1>Liberator</h1>
+    <p>Liberator is a library that helps Clojure developers create web
+      APIs that fully conform to HTTP requirements and REST principles.</p>
+
+    <h3 id="similar-projects">Similar projects</h3>
+    <p>Liberator used to be known as compojure-rest. It got renamed in July 2012.</p>
+    <p>Liberator is loosely modeled after webmachine and shares the same aims as Bishop.</p>
+    <h2 id="warming-up">Warming up</h2>
+    <h3 id="dependencies">Dependencies</h3>
+    <p>The examples in this document rely on you installing <a href="http://leiningen.org">leiningen 2</a>.</p>
+    <p>We'll also use <code>curl</code> for testing. If you don't have curl installed (ie. you're using Windows), there's some Clojure tests you can use instead.</p>
+    <h3 id="running-the-examples">Running the examples</h3>
+    <p>A set of examples is included.</p>
+    <p>If you want to see the examples in a browser, run</p>
+    <pre><code>lein examples</code></pre>
+    <p>This will start a web server on port 8000 (but you can specify a alternative port with an argument, eg. <code>lein examples 8001</code>). Alternatively you can run the web server with <code>lein ring server</code>).</p>
+    <h3 id="ensuring-the-tests-pass">Ensuring the tests pass</h3>
+    <p>Liberator uses <a href="https://github.com/marick/Midje/">Midje</a> for testing. You can run all the tests like this :-</p>
+    <pre><code>lein midje</code></pre>
+    <h2 id="getting-started">Getting started</h2>
+    <p>Let's build our first REST service!</p>
+    <p>For the purposes of this example, I'll call this project <code>servalan</code> but (obviously) you can invent your own name.</p>
+    <pre><code>projects&gt; lein new servalan
+        projects&gt; cd !$
+        servalan&gt; ls</code></pre>
+    <p>Notice that a new <code>project.clj</code> has been created - edit this and add the following entries in the <code>dependencies</code> vector.</p>
+    <pre><code>[compojure &quot;1.0.2&quot;]
+        [ring/ring-jetty-adapter &quot;1.1.0&quot;]
+        [liberator &quot;0.3.2&quot;]</code></pre>
+    <p>Edit the file <code>src/servalan/core.clj</code>, adding the code in bold :-</p>
+    <pre>
+      (ns servalan.core
+      <span style="font-weight: bold">(:use [liberator.core :only [defresource]])</span>)
+
+      <span style="font-weight: bold">
+        (defresource my-first-resource
+
+        :available-media-types ["text/html" "text/plain"])
+      </span>
+
+      (defn -main
+      "I don't do a whole lot."
+      [& args]
+      (println "Hello, World!"))
+    </pre>
+
+    <h1 id="defining-resources">Defining resources</h1>
+    <p>Resources are created with <code>resource</code> taking keyword arguments.</p>
+    <p>Here's the classic 'Hello World' example :-</p>
+    <pre><code>(resource :handle-ok &quot;Hello World!&quot;)</code></pre>
+    <h1 id="ring-compatibility">Ring compatibility</h1>
+    <p>Resources are compatible with Ring and can be wrapped in Ring middleware. When evaluated, a <code>resource</code> returns a function which takes a Ring request and returns a Ring response. This means that resources can be wrapped in standard Ring middleware.</p>
+    <h1 id="routing-web-requests">Routing web requests</h1>
+    <p>Resources do not define routes but are compatible with routing libraries.</p>
+    <p>For example, to route a request with Compojure, wrap your resource in a <code>routes</code> wrapper :-</p>
+    <pre><code>(ns example
+        (:use [compojure.core :only [routes]]))
+
+        (routes 
+        (ANY &quot;/greeting&quot; [] 
+        (resource :handle-ok &quot;Hello World!&quot;)))</code></pre>
+    <p>To route a request with Moustache, declare your resource as the handler :-</p>
+    <pre><code>(ns example
+        (:use [net.cgrand.moustache :only [app]]))
+
+        (app 
+        [&quot;/greeting&quot;] (resource :handle-ok &quot;Hello World!&quot;))</code></pre>
+    <h1 id="named-resources">Named resources</h1>
+    <p>You may want to separate your routes from their target resources. There's a macro to provide a shorthand for this :-</p>
+    <pre><code>(defresource greeting :handle-ok &quot;Hello World!&quot;)</code></pre>
+    <h1 id="resource-maps">Resource maps</h1>
+    <p>The arguments given to <code>resource</code> are given as keyword-value pairs. These pairs are known as <em>overrides</em> and combined with a resource's default entries make up a map known as the <em>resource map</em>.</p>
+    <h1 id="overrides">Overrides</h1>
+    <p>Overrides fall into 4 categories.</p>
+    <ul>
+      <li>Decisions (keywords ending in a <code>?</code>)</li>
+      <li>Handlers (keywords starting with <code>handle-</code>)</li>
+      <li>Actions (keywords ending in a <code>!</code>)</li>
+      <li>Declarations (keywords that don't fall into the categories above)</li>
+    </ul>
+    <h2 id="decisions">Decisions</h2>
+    <p>When handling a web request, numerous decisions are made which determine the response. You can influence the response by electing to make one or more of these decisions.</p>
+    <p>For example, the <code>method-allowed?</code> decision dictates where a given request method should be accepted :-</p>
+    <pre><code>(resource :handle-ok &quot;Hello World!&quot;
+        :service-available? true
+        :method-allowed? #(#{:get :put :post} (get-in % [:request :request-method])))</code></pre>
+    <p>Decision values can be either constants evaluated at compile time or functions evaluated at runtime.</p>
+    <h3 id="decision-functions">Decision functions</h3>
+    <p>When you decide to override a decision with a function, this function takes a single argument (called the <em>context</em>) which is a map containing any state that has been accumulated during the processing of the resource request.</p>
+    <p>At a minimum this map contains the following entries :-</p>
+    <ul>
+      <li>:request - the Ring request</li>
+      <li>:resource - the resource map containing the values of all the possible overrides.</li>
+    </ul>
+    <p>Depending on how far the processing of the request has got, the map may also contain results of any content negotiation keyed under <code>:representation</code>.</p>
+    <p>The function must be return one of the following :-</p>
+    <ul>
+      <li>A boolean, determining the next step in the decision tree.</li>
+      <li>A map to be merged with the context, indicating a true value.</li>
+      <li>A vector pair containing a boolean as the first item and a map as the second item.</li>
+    </ul>
+    <h2 id="handlers">Handlers</h2>
+    <p>Handlers return a body response. They can be dynamic, in which case they are functions taking a single argument called the <em>context</em>.</p>
+    <p>The <em>context</em> is a map containing 5 entries :-</p>
+    <ul>
+      <li>:request - the Ring request.</li>
+      <li>:resource - the resource map containing the values of all the possible overrides.</li>
+      <li>:representation - a map reflecting the result of content negotiation between the user agent and server.</li>
+      <li>:status - the negotiated HTTP response status code.</li>
+      <li>:message - the message which normally accompanies the status code.</li>
+    </ul>
+    <p>The result of a handler is a Ring response which is map containing the status, header map and body keyed with <code>:status</code>, <code>:headers</code> and <code>:body</code> respectively.</p>
+    <p>If you don't set one of the entries it will be set to the appropriate default value.</p>
+    <p>You can also return anything that can be coerced into a Ring response (by implementing <code>liberator.representation.Representation</code> protocol). Out-of-the-box this includes String, File and InputStream instances, plus the usual Clojure data types.</p>
+    <h2 id="actions">Actions</h2>
+    <p>Actions work the same way as handlers but cannot return anything. Actions presume some side-effect will occur. They are called when some underlying resource state is to be mutated during the POST, PUT and DELETE methods of the HTTP protocol.</p>
+    <h2 id="declarations">Declarations</h2>
+    <p>Declarations work the same way as decisions but return a value rather than a boolean. Resources indicate their capabilities via declarations. What each declaration should provide depends on the declaration type so you should check examples and documentation.</p>
+    <h1 id="examples">Examples</h1>
+    <p>Examples can be found in the examples/ dir.</p>
+    <h1 id="reference-list-of-decisions">Reference: List of decisions</h1>
+    <p>Decision points can be :-</p>
+    <ul>
+      <li>allowed? (decision)</li>
+      <li>authorized? (decision)</li>
+      <li>available-charsets (declaration)</li>
+      <li>available-encodings (declaration)</li>
+      <li>available-languages (declaration)</li>
+      <li>available-media-types (declaration)</li>
+      <li>can-post-to-missing? (decision)</li>
+      <li>charset-available? (decision)</li>
+      <li>conflict? (decision)</li>
+      <li>delete! (action)</li>
+      <li>encoding-available? (decision)</li>
+      <li>etag (declaration)</li>
+      <li>existed? (decision)</li>
+      <li>exists? (decision)</li>
+      <li>handle-created (handler)</li>
+      <li>handle-gone (handler)</li>
+      <li>handle-malformed (handler)</li>
+      <li>handle-method-not-allowed (handler)</li>
+      <li>handle-multiple-representations (handler)</li>
+      <li>handle-multiple-representations (handler)</li>
+      <li>handle-no-content (handler)</li>
+      <li>handle-not-acceptable (handler)</li>
+      <li>handle-not-found (handler)</li>
+      <li>handle-not-found (handler)</li>
+      <li>handle-not-implemented (handler)</li>
+      <li>handle-not-modified (handler)</li>
+      <li>handle-ok (handler)</li>
+      <li>handle-precondition-failed (handler)</li>
+      <li>handle-request-entity-too-large (handler)</li>
+      <li>handle-service-not-available (handler)</li>
+      <li>handle-unsupported-media-type (handler)</li>
+      <li>handle-uri-too-long (handler)</li>
+      <li>known-content-type? (decision)</li>
+      <li>known-method? (decision)</li>
+      <li>language-available? (decision)</li>
+      <li>malformed? (decision)</li>
+      <li>method-allowed? (decision)</li>
+      <li>multiple-representations? (decision)</li>
+      <li>new? (decision)</li>
+      <li>post! (action)</li>
+      <li>post-redirect? (decision)</li>
+      <li>post-to-existing? (decision)</li>
+      <li>put! (action)</li>
+      <li>put-to-different-url? (decision)</li>
+      <li>respond-with-entity? (decision)</li>
+      <li>see-other (declaration)</li>
+      <li>service-available? (decision)</li>
+      <li>unauthorized (handler)</li>
+      <li>unknown-method (handler)</li>
+      <li>uri-too-long? (decision)</li>
+      <li>valid-content-header? (decision)</li>
+      <li>valid-entity-length? (decision)</li>
+    </ul>
+    <p>available-* = option .<em>? = decision .</em>! = action :else handler</p>
+    <h1 id="license">License</h1>
+    <p>Liberator is licensed under EPL 1.0 (see file epl-v10.html).</p>
+  </body>
+</html>
+
