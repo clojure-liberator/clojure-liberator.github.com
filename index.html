@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <title>Liberator</title>
     <style>
-      body { background: #fdfdff; color: black; font-family: Arial; font-size: 11pt }
+      body { background: #fdfdff; margin-left: 24pt; margin-top: 24pt; color: black; font-family: Arial; font-size: 11pt }
       #title { display: none; }
       div#logo { float: left; width: 70px; border: 1px solid black }
       #introduction p { font-size: 120%; margin-top: 3pt; }
       #introduction p#description { font-size: 160%; margin-top: 3pt; }
       section { float: left; width: 600px; margin-left: 20pt; clear: both }
-      section#introduction { float: left; width: 400px; clear: none }
+      section#introduction { float: left; width: 600px; clear: none }
     </style>  
   </head>
   <body>
@@ -63,11 +63,13 @@
       <p id="description">Liberator is a Clojure web library with an emphasis on REST. 
       </p>
 
-      <p>Whereas many web frameworks give the developer the responsibility
-      to work out the proper response status code and set response
-      headers, but Liberator is based on a design where these things are
-      handled automatically, leaving the developer to focus on the
-        response body.</p>
+      <p>Most web server APIs ask the application developer to implement
+      much of the HTTP specification, such as providing the proper
+      response status codes, performing content negotiation and setting
+      response headers correctly. Liberator is different and
+      automatically determines these leaving the developer to focus on
+      formatting the response body (the page, document, data) to return
+      to the client.</p>
     </section>
 
     <section>
@@ -75,10 +77,10 @@
 
       <p>Add Liberator to your Clojure web application, and HTTP
       requests will be channelled through a decision tree which decides
-      when decisions are made. You get to choose which decisions you
-      want to make.</p>
+      when decisions are made. You get to choose the decisions you wish
+      to make.</p>
 
-      <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="300">
+      <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="340">
         <defs>
           <style type="text/css">
             <![CDATA[
@@ -138,11 +140,26 @@
           <path d="M 0,-50 v 25" stroke-width="3px" stroke="blue" marker-end="url(#darkblue-marker)"/>
 
           <g transform="translate(0,0)">
-            <text x="-25" y="0"><tspan text-anchor="end" dominant-baseline="central" font-style="italic">:service-available?</tspan></text>
+            <text x="-25" y="0">
+              <tspan text-anchor="end" dominant-baseline="central" 
+font-style="italic">:service-available?</tspan>
+            </text>
+            <text x="-25" y="15" visibility="hidden">
+              <tspan text-anchor="end" dominant-baseline="central" 
+font-style="italic">TRUE</tspan>
+              
+              <set attributeName="visibility" to="visible" begin="0.2s" dur="indefinite"/>
+            </text>
 
-            <use id="s1" x="0" y="0" xlink:href="#decision"/>
-
-            <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
+            <g transform="rotate(45)">
+              <use id="s1" x="0" y="0" xlink:href="#decision"/>
+              <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
+              <animateTransform id="anim1"
+                                attributeName="transform" 
+                                attributeType="XML"
+                                type="rotate" from="45" to="90"
+                                begin="0s" dur="0.4s" fill="freeze" />
+            </g>
 
             <g transform="translate(40,0)">
               <text x="5" y="0"><tspan text-anchor="start" text-anchor="start" dominant-baseline="middle" font-style="italic">:handle-service-not-available</tspan></text>
@@ -158,23 +175,30 @@
             </g>
 
 
-            <path d="M 0,20 v 15" stroke-width="3px" stroke="darkgreen" marker-end="url(#darkgreen-marker)"/>
+<!--
+            <path d="M 0,20 v 15" stroke-width="3px" stroke="darkgreen" marker-end="url(#darkgreen-marker)"/> -->
           </g>
 
           <g transform="translate(0,60)">
 
             <text x="-25" y="0"><tspan text-anchor="end" font-style="italic" dominant-baseline="central">:authorized?</tspan></text>
 
-            <g transform="rotate(0)">
+            <text x="-25" y="15" visibility="hidden">
+              <tspan text-anchor="end" dominant-baseline="central" 
+font-style="italic">TRUE</tspan>
+              <set attributeName="visibility" to="visible" begin="0.4s" dur="indefinite"/>
+            </text>
+
+
+            <g transform="rotate(45)">
               <use id="s2" x="0" y="0" xlink:href="#decision"/>
+              <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
               <animateTransform id="anim1"
                                 attributeName="transform" 
                                 attributeType="XML"
-                                type="rotate" from="0" to="90"
-                                begin="0s" dur="0.5s" fill="freeze" />
+                                type="rotate" from="45" to="90"
+                                begin="0.15s" dur="0.4s" fill="freeze" />
             </g>
-
-            <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
 
             <g transform="translate(40,0)">
               <text x="5" y="0"><tspan font-style="italic" dominant-baseline="middle" text-anchor="start">:handle-unauthorized</tspan></text>
@@ -189,17 +213,29 @@
               </g>
             </g>
 
-            <path d="M 0,20 v 15" stroke-width="3px" stroke="darkgreen" marker-end="url(#darkgreen-marker)"/>
+<!--            <path d="M 0,20 v 15" stroke-width="3px" stroke="darkgreen" marker-end="url(#darkgreen-marker)"/> -->
             
           </g>
 
           <g transform="translate(0,120)">
 
             <text x="-25" y="0" text-anchor="end" font-style="italic" dominant-baseline="central">:valid-entity-length?</text>
+            <text x="-25" y="15" visibility="hidden">
+              <tspan text-anchor="end" dominant-baseline="central" 
+font-style="italic">TRUE</tspan>
+              <set attributeName="visibility" to="visible" begin="0.6s" dur="indefinite"/>
+            </text>
 
-            <use id="s2" x="0" y="0" xlink:href="#decision"/>
 
-            <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
+            <g transform="rotate(45)">
+              <use x="0" y="0" xlink:href="#decision"/>
+              <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
+              <animateTransform id="anim1"
+                                attributeName="transform" 
+                                attributeType="XML"
+                                type="rotate" from="45" to="90"
+                                begin="0.3s" dur="0.4s" fill="freeze" />
+            </g>
 
             <g transform="translate(40,0)">
               <text x="5" y="0"><tspan font-style="italic" dominant-baseline="middle" text-anchor="start">:handle-request-entity-too-large</tspan></text>
@@ -214,50 +250,59 @@
               </g>
             </g>
 
-            <path d="M 0,20 v 15" stroke-width="3px" stroke="darkgreen" marker-end="url(#darkgreen-marker)"/>
+<!--            <path d="M 0,20 v 15" stroke-width="3px" stroke="darkgreen" marker-end="url(#darkgreen-marker)"/> -->
             
           </g>
 
-        </g>
+          <g transform="translate(0,180)">
 
-        <!-- Vertical route -->
-        <g transform="translate(150,50)">
+            <text x="-25" y="0" text-anchor="end" font-style="italic" dominant-baseline="central">:resource-exists?</text>
+            <text x="-25" y="15" visibility="hidden">
+              <tspan text-anchor="end" dominant-baseline="central" 
+font-style="italic">FALSE</tspan>
+              <set attributeName="visibility" to="visible" begin="0.8s" dur="indefinite"/>
+            </text>
 
-          <g transform="rotate(0)">
-            <animateTransform id="anim1"
-                              attributeName="transform" 
-                              attributeType="XML"
-                              type="rotate" from="0" to="90"
-                              begin="indefinite" dur="0.2s" fill="freeze" />
-            <animateTransform id="anim2"
-                              attributeName="transform" 
-                              attributeType="XML"
-                              type="rotate" from="90" to="0"
-                              begin="indefinite" dur="0.2s" fill="freeze" />
-            <animateTransform id="anim3"
-                              attributeName="transform" 
-                              attributeType="XML"
-                              type="rotate" from="90" to="270"
-                              begin="indefinite" dur="0.2s" fill="freeze" />
-            <animateTransform id="anim4"
-                              attributeName="transform" 
-                              attributeType="XML"
-                              type="rotate" from="270" to="0"
-                              begin="indefinite" dur="0.2s" fill="freeze" />
+            <g transform="rotate(45)">
+              <use x="0" y="0" xlink:href="#decision"/>
+              <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
+              <animateTransform 
+                                attributeName="transform" 
+                                attributeType="XML"
+                                type="rotate" from="45" to="0"
+                                begin="0.45s" dur="0.4s" fill="freeze" />
+            </g>
+
+            <g transform="translate(40,0)">
+              <text x="5" y="0"><tspan font-style="italic" dominant-baseline="middle" text-anchor="start">:handle-not-found</tspan></text>
+
+              <g transform="translate(145,-20)">
+                <use x="0" y="0" xlink:href="#entry"/>
+                <text x="5" y="10" dominant-baseline="central" font-style="italic">:status</text>
+                <text x="75" y="10" dominant-baseline="central">404</text>
+                <use x="0" y="20" xlink:href="#entry"/>
+                <text x="5" y="30" dominant-baseline="central" font-style="italic">:message</text>
+                <text x="75" y="30" dominant-baseline="central">"Not Found."</text>
+              </g>
+            </g>
+
+<!--            <path d="M 0,20 v 15" stroke-width="3px" stroke="darkgreen" marker-end="url(#darkgreen-marker)"/> -->
             
-<!--
-            <circle x="0" cy="0" r="40" fill="white" stroke="black" stroke-width="2"/>
+          </g>
 
-            <path d="M 10,0 l 0,-38.73 a 40,40 90 0,1 0,77.461 z" stroke="black" stroke-width="2" fill="green"/>
+          <g transform="translate(-30,240)">
+            <text x="5" y="0"><tspan font-style="italic" dominant-baseline="middle" text-anchor="start">:handle-ok</tspan></text>
 
--->
+            <g transform="translate(75,-20)">
+              <use x="0" y="0" xlink:href="#entry"/>
+              <text x="5" y="10" dominant-baseline="central" font-style="italic">:status</text>
+              <text x="75" y="10" dominant-baseline="central">200</text>
+              <use x="0" y="20" xlink:href="#entry"/>
+              <text x="5" y="30" dominant-baseline="central" font-style="italic">:message</text>
+              <text x="75" y="30" dominant-baseline="central">"OK."</text>
+            </g>
           </g>
         </g>
-
-        <!-- Horizontal route -->
-        <!--
-            <path d="M 50,60 l 38.73,0 a 40,40 90 0,1 -77.461,0 z" stroke="black" stroke-width="2" fill="green"/>
-            -->
 
       </svg>
       <script>
