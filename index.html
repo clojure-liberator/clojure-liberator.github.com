@@ -12,6 +12,11 @@
       #introduction p#description { font-size: 160%; margin-top: 3pt; }
       section { float: left; width: 600px; margin-left: 20pt; clear: both }
       section#introduction { float: left; width: 600px; clear: none }
+      svg { border: 1px dotted black }
+      div#logo svg { border: none }
+      nav { margin-left: 40pt }
+      ul { list-style-type: none }
+      li { display: inline; }
     </style>  
   </head>
   <body>
@@ -57,7 +62,7 @@
       </svg>
     </div>
 
-    <section id="introduction" style="margin-bottom: 80px">
+    <section id="introduction">
       <h1 id="title">Liberator</h1>
 
       <p id="description">Liberator is a free, open-source, web library for the Clojure programming language with an emphasis on <abbr title="Representational State Transfer">REST</abbr>. 
@@ -72,6 +77,101 @@
         to the client.</p>
     </section>
 
+    <nav>
+      <ul>
+        <li><a href="#download">Download</a></li>
+        <li><a href="http://github.com/clojure-liberator/liberator">GitHub</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+
+    <section>
+      <h2>What it is</h2>
+      <p>
+        Liberator (shared values with REST) - data structures
+      </p>
+    </section>
+
+    <section>
+      <h2>Where it fits</h2>
+
+      <p>Liberator allows you to create web resources that act as Ring
+      handlers. Each resource is a Clojure function that takes a single
+      argument (the Ring request) and returns a Ring response.</p>
+      
+      <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="180">
+        <defs>
+          <style type="text/css">
+            <![CDATA[
+      text {
+        font-size: 9pt;
+        font-family: Arial;
+      }
+    ]]>
+          </style>
+          <marker id="arrowhead"
+                  viewBox="0 0 10 10" refX="5" refY="5" 
+                  markerUnits="strokeWidth"
+                  markerWidth="4" markerHeight="3" fill="darkred"
+                  stroke="black"
+                  orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+          </marker>
+        </defs>
+
+        <g transform="translate(30,20)">
+          <rect x="0" y="0" width="120" height="140" fill="grey" opacity="0.2" stroke="black" stroke-width="2"/>
+          <text x="60" y="60" text-anchor="middle" dominant-baseline="central">Browser or other</text>
+          <text x="60" y="80" text-anchor="middle" dominant-baseline="central">HTTP user-agent</text>
+        </g>
+
+        <g transform="translate(275,20)">
+          <rect x="0" y="0" width="100" height="140" fill="red" opacity="0.2" stroke="black" stroke-width="2"/>
+          <text x="50" y="50" text-anchor="middle" dominant-baseline="central">Java-based</text>
+          <text x="50" y="70" text-anchor="middle" dominant-baseline="central">web server</text>
+          <text x="50" y="90" text-anchor="middle" dominant-baseline="central">(eg. Jetty)</text>
+        </g>
+
+        <a xlink:href="http://google.com?q=clojure+ring">
+          <g transform="translate(375,160) rotate(-90)">
+            <rect x="0" y="0" width="140" height="30" fill="green" opacity="0.2" stroke="black" stroke-width="2"/>
+            <text x="70" y="15" text-decoration="underline" text-anchor="middle" dominant-baseline="central" fill="blue">Ring interface</text>
+          </g>
+        </a>
+
+        <g transform="translate(405,160) rotate(-90)">
+          <rect x="0" y="0" width="140" height="40" fill="green" opacity="0.2" stroke="black" stroke-width="2"/>
+          <text x="70" y="12" text-anchor="middle" dominant-baseline="central">Ring-middleware</text>
+          <text x="70" y="28" text-anchor="middle" dominant-baseline="central">and routing</text>
+        </g>
+
+        <g transform="translate(450,160) rotate(-90)">
+<!--          <rect x="0" y="0" width="140" height="55" fill="green" opacity="0.2" stroke="black" stroke-width="2"/> -->
+          <path d="M0,50 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v-55 h-140 z" stroke-width="2" stroke="black" fill="green" opacity="0.2"/>
+          <text x="70" y="20"><tspan text-anchor="middle"  dominant-baseline="central" font-size="12pt" font-weight="bold">Liberator</tspan></text>
+        </g>
+
+        <g transform="translate(515,160) rotate(-90)">
+<!--          <rect x="0" y="0" width="140" height="40" fill="green" opacity="0.2" stroke="black" stroke-width="2"/>-->
+          <path d="M0,62 v-80 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v80z" stroke-width="2" stroke="black" fill="green" opacity="0.2"/>
+          <text x="70" y="20"><tspan text-anchor="middle"  dominant-baseline="central" font-size="12pt" font-weight="bold" fill="green">Your code</tspan></text>
+        </g>
+
+        <path id="request-response" d="M120,30 h430 a 60,20 270 0,1 0,120 h-390" stroke="darkred" opacity="0.5" stroke-width="5px" fill="none" marker-start="url(#arrowhead)" marker-end="url(#arrowhead)"/>
+
+        <circle cx="0" cy="0" r="4" fill="white">
+          <desc>This is the 'pulse' that follows the request-response path to indicate the order that events happen. Not that useful but makes things a bit more obvious.</desc>
+<!--
+          <animateMotion dur="2s" repeatCount="2" rotate="auto">
+            <mpath xlink:href="#request-response"/>
+          </animateMotion>
+-->
+        </circle>
+
+      </svg>
+
+    </section>
+
     <section>
       <h2>How it works</h2>
 
@@ -83,7 +183,7 @@
       determine the response status.</p>
 
 
-      <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="340">
+      <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="330">
         <defs>
           <style type="text/css">
             <![CDATA[
@@ -319,16 +419,10 @@
 
       </svg>
 
-      <p>Every status has a
-      corresponding <dfn id="handler">handler function</dfn> which
-      produces the response.</p>
+      <p>Every status has a corresponding <dfn id="handler">handler
+      function</dfn> which produces the response. As a developer you can
+      specify replacements to these decision and handler functions.</p>
 
-      <p>As a developer you can specify replacements to these
-      decision and handler functions.</p>
-
-    </section>
-
-    <section>
       <style>
         pre { background: black; margin-left: 10pt; padding-left: 20pt; overflow: scroll }
         code { color: white }
@@ -336,8 +430,7 @@
         .clojure.keyword { color: pink; font-weight: normal }
         .clojure.string { color: orange; font-weight: normal }
       </style>
-      <h2>Show me some code!</h2>
-      <p>Suppose we want to override the default 404 message. We can do that by <em>overriding the handler</em>. We do this by specifying a named argument, in this case, the name is :handle-not-found. For now, we'll just use a string but we can provide a function too. More on that later.</p>
+      <p>For example, suppose we want to override the default 404 message. We can do that by specifying a named argument, in this case, the name is :handle-not-found. For now, we'll just use a string but we can provide a function too. More on that later.</p>
       <pre><code>
 (<span class="clojure symbol">use</span> 'liberator.core <span class="clojure keyword">:only</span> [<span class="clojure symbol">resource</span>])
 
@@ -355,7 +448,14 @@
       <p>This will start a web server on port 8000 (but you can specify a alternative port with an argument, eg. <kbd>lein examples 8001</kbd>). Alternatively you can run the web server with <kbd>lein ring server</kbd>).</p>
     </section>
 
-    <!-- TODO: Provide a means to quickly download the package, view the github source, and the 'power-user' stuff that most visitors will need. -->
+    <section>
+      <a name="faq"/>
+      <h2>F.A.Q.</h2>
+      <dl>
+        <dt>Why isn't Liberator simply a set of Ring middleware?</dt>
+        <dd>Answer</dd>
+      </dl>
+    </section>
 
   </body>
 </html>
