@@ -527,7 +527,8 @@
     </section>
 
     <section>
-      <h2>The context argument</h2>
+      <h2>Replacing functions<h2>
+      <h3>The context argument</h3>
       <p>
         The context argument is provided as a single argument to all
         replacement functions. It is a map of 5 entries.
@@ -547,11 +548,18 @@
           </tr>
           <tr>
             <td>:representation</td>
-            <td></td>
+            <td>This is a map containing the results of content negotiation. It contains 4 possible values.
+              <ul>
+                <li>:media-type</li>
+                <li>:language</li>
+                <li>:charset</li>
+                <li>:encoding</li>
+              </ul>
+            </td>
           </tr>
           <tr>
             <td>:status</td>
-            <td></td>
+            <td>The response status code</td>
           </tr>
           <tr>
             <td>:message</td>
@@ -560,6 +568,27 @@
         </tbody>
       </table>
         
+      <h3>The return value</h3>
+
+      <p>For decision functions you usually return a boolean. If you
+      return a map, this will get merged into the context given to
+      future functions. Returning a map implies a true result, so if you
+      want to return a false result but also specify a map you can do
+      this by returning a vector pair containing the map, ie. [false
+      {}] </p>
+
+      <p>For handler functions you have more flexibility. If you return
+      a map, it will be treated as a Ring response map. Anything else
+      will be treated as the :body value of a Ring reponse map, and the
+      rest of the details will be added by Liberator. It is possible in
+      this way to override the status code if necessary. Only do this if
+      you know what you're doing, but if you're sure Liberator won't
+      stand in your way.</p>
+
+      <h3>Function reference</h3>
+      <p>TODO: A table of all the functions that can be replaced.</p>
+      <p>TODO: A diagram showing all the parts of the full decision tree.</p>
+
     </section>
 
     <section id="running-the-examples">
