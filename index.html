@@ -161,11 +161,9 @@
 
         <circle cx="0" cy="0" r="4" fill="white">
           <desc>This is the 'pulse' that follows the request-response path to indicate the order that events happen. Not that useful but makes things a bit more obvious.</desc>
-<!--
           <animateMotion dur="2s" repeatCount="2" rotate="auto">
             <mpath xlink:href="#request-response"/>
           </animateMotion>
--->
         </circle>
 
       </svg>
@@ -434,7 +432,6 @@
       <pre><code>
 (<span class="clojure symbol">use</span> 'liberator.core <span class="clojure keyword">:only</span> [<span class="clojure symbol">resource</span>])
 
-;; TODO - put a number symbol in here (see unicode circles) in the margin
 (<span class="clojure symbol">resource</span>
   <span class="clojure keyword">:handle-not-found</span> <span class="clojure string">"Oops, we didn't find anything!"</span>)
       </code></pre>
