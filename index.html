@@ -7,16 +7,22 @@
     <style>
       body { background: #fdfdff; margin-left: 24pt; margin-top: 24pt; color: black; font-family: Arial; font-size: 11pt }
       #title { display: none; }
-      div#logo { float: left; width: 70px; border: 1px solid black }
+      div#logo { float: left; width: 70px; border: 1px solid black; position: absolute }
       #introduction p { font-size: 120%; margin-top: 3pt; }
-      #introduction p#description { font-size: 160%; margin-top: 3pt; }
-      section { float: left; width: 600px; margin-left: 20pt; clear: both }
-      section#introduction { float: left; width: 600px; clear: none }
-      svg { border: 1px dotted black }
+      #introduction p#description { font-size: 160%; margin-top: 3pt; margin-left: 0px }
+      section { float: left; width: 600px; margin-left: 100px; clear: left }
+      aside { position: absolute; margin-top: 100pt; float: left; width: 320px; margin-left: 720px; border: 1px solid grey; padding: 6pt; background: #cfc }
+      svg { border: 0px dotted black }
       div#logo svg { border: none }
-      nav { margin-left: 40pt }
-      ul { list-style-type: none }
-      li { display: inline; }
+      nav { margin-left: 40pt; float: left }
+      nav ul { list-style-type: none }
+      nav li { display: inline; }
+      dl.callouts dt { float: left; }
+      dl.callouts dd { padding-bottom: 4pt; margin-left: 16pt }
+      pre { background: black; margin-left: 10pt; padding: 6px; overflow: auto; border: 2px solid grey; color: lightgrey; }
+      .clojure.symbol { color: #2c2; font-weight: bold }
+      .clojure.keyword { color: pink; font-weight: normal }
+      .clojure.string { color: orange; font-weight: normal; font-size: 80% }
     </style>  
   </head>
   <body>
@@ -24,8 +30,8 @@
       <svg
          xmlns="http://www.w3.org/2000/svg"
          version="1.1"
-         width="147.40625"
-         height="90.3289"
+         width="90"
+         height="90"
          >
         <g
            transform="translate(-5,2) scale(0.5,0.5)"
@@ -65,7 +71,7 @@
     <section id="introduction">
       <h1 id="title">Liberator</h1>
 
-      <p id="description">Liberator is a free, open-source, web library for the Clojure programming language with an emphasis on <abbr title="Representational State Transfer">REST</abbr>. 
+      <p id="description">Liberator is a free, open-source web library for the Clojure programming language with an emphasis on <abbr title="Representational State Transfer">REST</abbr>. 
       </p>
 
       <p style="display: none">Most web server APIs ask the application developer to implement
@@ -88,17 +94,56 @@
     <section>
       <h2>What it is</h2>
       <p>
-        Liberator (shared values with REST) - data structures
+        Liberator is a Clojure library that helps you expose your data
+        as REST resources while automatically complying with all the
+        relevant requirements of HTTP specification (RFC-2616). Your
+        resources will automatically gain useful HTTP features, such as
+        cacheing and content negotiation.
       </p>
     </section>
 
     <section>
       <h2>Where it fits</h2>
 
-      <p>Liberator allows you to create web resources that act as Ring
-      handlers. Each resource is a Clojure function that takes a single
-      argument (the Ring request) and returns a Ring response.</p>
+      <p>
+        Liberator is not a full-featured web framework like
+      <a href="http://www.webnoir.org">Noir</a>. Rather, Liberator forms part of a composition of other components. So be prepared to ...</p>
+      <ul>
+        <li>Add a routing library, like <a href="#">Compojure</a> or <a href="#">Moustache</a></li>
+        <li>Add a presentation library, like <a href="#">Hiccup</a></li>
+        <li>Add some miscellaneous Ring middleware</li>
+      </ul>
+
+      <p>If you are familiar with Ring, Liberator <dfn>resources</dfn>
+        are Ring handlers. A Ring handler is a Clojure function that
+        takes a map as an argument (representing the web request) and
+        returns another map representing the web response.</p>
       
+      <p>You connect a Liberator resource to a route. For example,
+      if you use Compojure as your routing library, you would connect things like this :-</p>
+
+      <pre><code>(<span class="clojure symbol">ns</span> com.acme
+  (<span class="clojure symbol">require</span> 
+    [compojure.core <span class="clojure keyword">:as</span> compojure]
+    [liberator.core <span class="clojure keyword">:as</span> liberator]))
+
+(<span class="clojure symbol">compojure/ANY</span> <span class="clojure string">"/products/:sku"</span> [sku]
+  (<span class="clojure symbol">liberator/resource</span> &#9312;)
+</code></pre>
+
+        <dl class="callouts">
+          <dt>&#9312;</dt>
+          <dd>The Liberator <code>resource</code> function takes an even
+      number of arguments, each pair is a keyword (indicating the
+      argument name) and the argument value. There are over 50 different
+      arguments you can give to this function, all of which will be
+      explained later.</dd>
+        </dl>
+
+      <p>Now if we sent a web request to the server with the path <code>/products/54354</code> it would be routed to our Liberator resource.</p>
+
+      <p>This is how it all fits together :-</p>
+
       <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="180">
         <defs>
           <style type="text/css">
@@ -117,16 +162,24 @@
                   orient="auto">
             <path d="M 0 0 L 10 5 L 0 10 z" />
           </marker>
+          <linearGradient id="clojure">
+            <stop offset="5%" stop-color="#8F8" />
+            <stop offset="95%" stop-color="#88F" />
+          </linearGradient>
+          <linearGradient id="liberator">
+            <stop offset="5%" stop-color="#F4F" />
+            <stop offset="95%" stop-color="#F8F" />
+          </linearGradient>
         </defs>
 
         <g transform="translate(30,20)">
-          <rect x="0" y="0" width="120" height="140" fill="grey" opacity="0.2" stroke="black" stroke-width="2"/>
+          <rect x="0" y="0" width="120" height="140" fill="grey" opacity="0.5" stroke="black" stroke-width="2"/>
           <text x="60" y="60" text-anchor="middle" dominant-baseline="central">Browser or other</text>
           <text x="60" y="80" text-anchor="middle" dominant-baseline="central">HTTP user-agent</text>
         </g>
 
         <g transform="translate(275,20)">
-          <rect x="0" y="0" width="100" height="140" fill="red" opacity="0.2" stroke="black" stroke-width="2"/>
+          <rect x="0" y="0" width="100" height="140" fill="red" opacity="0.5" stroke="black" stroke-width="2"/>
           <text x="50" y="50" text-anchor="middle" dominant-baseline="central">Java-based</text>
           <text x="50" y="70" text-anchor="middle" dominant-baseline="central">web server</text>
           <text x="50" y="90" text-anchor="middle" dominant-baseline="central">(eg. Jetty)</text>
@@ -134,30 +187,30 @@
 
         <a xlink:href="http://google.com?q=clojure+ring">
           <g transform="translate(375,160) rotate(-90)">
-            <rect x="0" y="0" width="140" height="30" fill="green" opacity="0.2" stroke="black" stroke-width="2"/>
+            <rect x="0" y="0" width="140" height="30" fill="url(#clojure)" opacity="0.5" stroke="black" stroke-width="2"/>
             <text x="70" y="15" text-decoration="underline" text-anchor="middle" dominant-baseline="central" fill="blue">Ring interface</text>
           </g>
         </a>
 
         <g transform="translate(405,160) rotate(-90)">
-          <rect x="0" y="0" width="140" height="40" fill="green" opacity="0.2" stroke="black" stroke-width="2"/>
+          <rect x="0" y="0" width="140" height="40" fill="url(#clojure)" opacity="0.5" stroke="black" stroke-width="2"/>
           <text x="70" y="12" text-anchor="middle" dominant-baseline="central">Ring-middleware</text>
           <text x="70" y="28" text-anchor="middle" dominant-baseline="central">and routing</text>
         </g>
 
         <g transform="translate(450,160) rotate(-90)">
 <!--          <rect x="0" y="0" width="140" height="55" fill="green" opacity="0.2" stroke="black" stroke-width="2"/> -->
-          <path d="M0,50 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v-55 h-140 z" stroke-width="2" stroke="black" fill="green" opacity="0.2"/>
+          <path d="M0,50 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v-55 h-140 z" stroke-width="2" stroke="black" fill="url(#liberator)" opacity="0.5"/>
           <text x="70" y="20"><tspan text-anchor="middle"  dominant-baseline="central" font-size="12pt" font-weight="bold">Liberator</tspan></text>
         </g>
 
         <g transform="translate(515,160) rotate(-90)">
 <!--          <rect x="0" y="0" width="140" height="40" fill="green" opacity="0.2" stroke="black" stroke-width="2"/>-->
-          <path d="M0,62 v-80 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v80z" stroke-width="2" stroke="black" fill="green" opacity="0.2"/>
+          <path d="M0,65 v-80 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v80z" stroke-width="2" stroke="black" fill="url(#clojure)" opacity="0.5"/>
           <text x="70" y="20"><tspan text-anchor="middle"  dominant-baseline="central" font-size="12pt" font-weight="bold" fill="green">Your code</tspan></text>
         </g>
 
-        <path id="request-response" d="M120,30 h430 a 60,20 270 0,1 0,120 h-390" stroke="darkred" opacity="0.5" stroke-width="5px" fill="none" marker-start="url(#arrowhead)" marker-end="url(#arrowhead)"/>
+        <path id="request-response" d="M150,30 h400 a 60,20 270 0,1 0,120 h-390" stroke="darkred" opacity="0.5" stroke-width="5px" fill="none" marker-end="url(#arrowhead)"/>
 
         <circle cx="0" cy="0" r="4" fill="white">
           <desc>This is the 'pulse' that follows the request-response path to indicate the order that events happen. Not that useful but makes things a bit more obvious.</desc>
@@ -168,18 +221,48 @@
 
       </svg>
 
+      <p>(If you need more information about adding the web server component, see the Ring documentation <a href="#">here</a>).</p>
+
     </section>
+
+    <aside>
+      <h2>Why Clojure?</h2>
+      <p>
+        In the REST architectural style, data is organized into a set of
+        resources. The state of a particular resource can be communicated over the web in some representation of
+        that state. 
+      </p>
+      <p>
+        Clojure is an ideal implementation language for this architecture.
+      </p>
+      <ol>
+        <li>State in Clojure is contained in data structures such as
+        maps, sets and lists. Functions to represent those data
+        structures in formats such as JSON already exist. Compare this
+        with object-oriented languages such as Java where state is
+        encapsulated within custom objects and where the external
+        representation of this state is not something that is always
+        considered up-front.</li>
+        <li>
+          Clojure's data structures employ structural sharing which
+          enables efficient software transaction memory (STM). This
+          means that state can be modified by one thread, while being in
+          the process of being represented by another, without resorting
+          to locks.
+        </li>
+      </ol>
+    </aside>
 
     <section>
       <h2>How it works</h2>
 
-      <p>Liberator works by using a decision tree to determine how to
+      <p>Liberator works by using a <b>decision tree</b> to determine how to
       properly handle the request.</p>
 
       <p>Every decision is made by a <dfn>decision function</dfn>. The
       diagram below illustrates how the outcomes of decision functions
-      determine the response status.</p>
-
+      determine the response status and the <dfn>handler function</dfn>
+      that will produce the response.</p>
 
       <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="330">
         <defs>
@@ -216,7 +299,7 @@
           <marker id="darkblue-marker"
                   viewBox="0 0 10 10" refX="5" refY="5" 
                   markerUnits="strokeWidth"
-                  markerWidth="4" markerHeight="3" fill="blue"
+                  markerWidth="4" markerHeight="3" fill="purple"
                   orient="auto">
             <path d="M 0 0 L 10 5 L 0 10 z" />
           </marker>
@@ -239,13 +322,12 @@
 
         <g transform="translate(135,55)">
 
-          <path d="M 0,-50 v 25" stroke-width="3px" stroke="blue" marker-end="url(#darkblue-marker)"/>
+          <path d="M 0,-50 v 25" stroke-width="3px" stroke="purple" marker-end="url(#darkblue-marker)"/>
 
           <text x="-15" y="-40">
             <tspan text-anchor="end" dominant-baseline="central" 
                    font-style="italic">START</tspan>
           </text>
-
 
           <g transform="translate(0,0)">
             <text x="-25" y="0">
@@ -281,10 +363,6 @@
                 <text x="75" y="30" dominant-baseline="central">"Service unavailable."</text>
               </g>
             </g>
-
-
-            <!--
-                <path d="M 0,20 v 15" stroke-width="3px" stroke="darkgreen" marker-end="url(#darkgreen-marker)"/> -->
           </g>
 
           <g transform="translate(0,60)">
@@ -357,14 +435,17 @@
                 <text x="75" y="30" dominant-baseline="central">"Request Entity Too Large."</text>
               </g>
             </g>
-
-            <!--            <path d="M 0,20 v 15" stroke-width="3px" stroke="darkgreen" marker-end="url(#darkgreen-marker)"/> -->
-            
           </g>
 
           <g transform="translate(0,180)">
 
-            <text x="-25" y="0" text-anchor="end" font-style="italic" dominant-baseline="central">:resource-exists?</text>
+            <path d="M 40,0 l30,30 h365 v-60 h-365 z" stroke-width="2px" stroke="purple" fill="none" opacity="0">
+              <animate attributeType="CSS" attributeName="opacity" 
+                         from="0" to="0.8" begin="0.8s" dur="0.2s" fill="freeze"  />
+              <desc>Highlighting the successful result</desc>
+            </path>
+
+            <text x="-25" y="0"><tspan text-anchor="end" font-style="italic" dominant-baseline="central">:resource-exists?</tspan><tspan>&#9312;</tspan></text>
             <text x="-25" y="15" visibility="hidden">
               <tspan text-anchor="end" dominant-baseline="central" 
                      font-style="italic">FALSE</tspan>
@@ -381,14 +462,8 @@
                  begin="0.45s" dur="0.4s" fill="freeze" />
             </g>
 
-            <path d="M 40,0 l30,30 h365 v-60 h-365 z" stroke-width="2px" stroke="grey" fill="green" opacity="0">
-              <animate attributeType="CSS" attributeName="opacity" 
-                         from="0" to="0.2" begin="0.8s" dur="0.2s" fill="freeze"  />
-              <desc>Highlighting the successful result</desc>
-            </path>
-
             <g transform="translate(40,0)">
-              <text x="15" y="0"><tspan font-style="italic" dominant-baseline="middle" text-anchor="start">:handle-not-found</tspan></text>
+              <text x="15" y="0"><tspan font-style="italic" dominant-baseline="middle" text-anchor="start">:handle-not-found</tspan><tspan>&#9313;</tspan></text>
 
               <g transform="translate(145,-20)">
                 <use x="0" y="0" xlink:href="#entry"/>
@@ -417,25 +492,74 @@
 
       </svg>
 
-      <p>Every status has a corresponding <dfn id="handler">handler
-      function</dfn> which produces the response. As a developer you can
-      specify replacements to these decision and handler functions.</p>
+      <dl class="callouts">
+        <dt>&#9312;</dt>
+        <dd>This is a <em>decision function</em>.</dd>
+        <dt>&#9313;</dt>
+        <dd>This is a <em>handler function</em>.</dd>
+      </dl>
 
-      <style>
-        pre { background: black; margin-left: 10pt; padding-left: 20pt; overflow: scroll }
-        code { color: white }
-        .clojure.symbol { color: green; font-weight: bold }
-        .clojure.keyword { color: pink; font-weight: normal }
-        .clojure.string { color: orange; font-weight: normal }
-      </style>
-      <p>For example, suppose we want to override the default 404 message. We can do that by specifying a named argument, in this case, the name is :handle-not-found. For now, we'll just use a string but we can provide a function too. More on that later.</p>
-      <pre><code>
-(<span class="clojure symbol">use</span> 'liberator.core <span class="clojure keyword">:only</span> [<span class="clojure symbol">resource</span>])
+      <p>As a developer you can specify <b>replacements</b> to both these types of function.</p>
 
-(<span class="clojure symbol">resource</span>
-  <span class="clojure keyword">:handle-not-found</span> <span class="clojure string">"Oops, we didn't find anything!"</span>)
-      </code></pre>
+      <p>For example, suppose we want to override the default 404
+      message. We can do that by providing a replacement to
+      the <em>:handle-not-found</em> handler function.</p>
+
+      <pre><code>(<span class="clojure symbol">liberator/resource</span>
+  <span class="clojure keyword">:handle-not-found</span> (<span class="clojure symbol">fn</span>&#9312; [ctx&#9313;] <span class="clojure string">"Oops, we didn't find anything!"</span>&#9314;))</code></pre>
       
+      <dl class="callouts">
+        <dt>&#9312;</dt>
+        <dd>We are providing a replacement function, but we could just specify the string value in this case. Constant values can be used in place of functions where appropriate.</dd> 
+       <dt>&#9313;</dt>
+        <dd>This is the Liberator <em>context</em> argument. We'll come to this shortly.</dd>
+        <dt>&#9314;</dt>
+        <dd>We just returned a string here. Liberator is smart enough to turn this into a proper Ring response. 
+      </dl>
+
+      <p>So the value which will be returned from the resource will be something like this :-</p>
+
+      <pre><code>{:status 404
+ :body "Oops, we didn't find anything!"}</code></pre>
+
+      <p>This will be processed by Ring to generate the final HTTP response.</p>
+
+    </section>
+
+    <section>
+      <h2>The context argument</h2>
+      <p>
+        The context argument is provided as a single argument to all
+        replacement functions. It is a map of 5 entries.
+      </p>
+      <table>
+        <thead>
+          <tr><td>Keyword</td><td>Description</td></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>:request</td>
+            <td>The original Ring request</td>
+          </tr>
+          <tr>
+            <td>:resource</td>
+            <td>The resource map that defines the Liberator resource</td>
+          </tr>
+          <tr>
+            <td>:representation</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>:status</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>:message</td>
+            <td>The default status message that usually accompanies the status code</td>
+          </tr>
+        </tbody>
+      </table>
+        
     </section>
 
     <section id="running-the-examples">
