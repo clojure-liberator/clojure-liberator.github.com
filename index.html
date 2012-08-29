@@ -11,8 +11,9 @@
       body { background: #fdfdff; margin-left: 24pt; margin-top: 24pt; color: black; font-family: Molengo,Helvetica,Arial; font-size: 11pt }
       #title { display: none; }
       div#logo { float: left; width: 70px; border: 1px solid black; position: absolute }
-      #introduction p { font-family: Oregano; font-size: 120%; margin-top: 3pt; }
+      #introduction p { font-family: Oregano; font-size: 20pt; margin-top: 3pt; }
       h1, h2 { font-family: Oregano; font-weight: normal }
+      h2 { font-size: 20pt }
       #introduction p#description { font-size: 160%; margin-top: 3pt; margin-left: 0px }
       section { float: left; width: 600px; margin-left: 100px; clear: left }
       aside { position: absolute; margin-top: 100pt; float: left; width: 320px; margin-left: 720px; border: 1px solid grey; padding: 6pt; background: #cfc }
@@ -115,7 +116,7 @@
       <p>
         Liberator is a Clojure library that helps you expose your data
         as REST resources while automatically complying with all the
-        relevant requirements of HTTP specification (RFC-2616). Your
+        relevant requirements of HTTP specification (<a href="http://www.ietf.org/rfc/rfc2616.txt">RFC-2616</a>). Your
         resources will automatically gain useful HTTP features, such as
         cacheing and content negotiation.
       </p>
@@ -169,7 +170,7 @@
             <![CDATA[
       text {
         font-size: 9pt;
-        font-family: Arial;
+        font-family: Molengo,Arial;
       }
     ]]>
           </style>
@@ -289,7 +290,7 @@
             <![CDATA[
       text {
         font-size: 9pt;
-        font-family: Arial;
+        font-family: Molengo,Arial;
       }
     ]]>
           </style>
@@ -345,17 +346,17 @@
 
           <text x="-15" y="-40">
             <tspan text-anchor="end" dominant-baseline="central" 
-                   font-style="italic">START</tspan>
+                   font-style="normal">START</tspan>
           </text>
 
           <g transform="translate(0,0)">
             <text x="-25" y="0">
               <tspan text-anchor="end" dominant-baseline="central" 
-                     font-style="italic">:service-available?</tspan>
+                     font-style="normal">:service-available?</tspan>
             </text>
             <text x="-25" y="15" visibility="hidden">
               <tspan text-anchor="end" dominant-baseline="central" 
-                     font-style="italic">TRUE</tspan>
+                     font-style="normal">TRUE</tspan>
               
               <set attributeName="visibility" to="visible" begin="0.2s" dur="indefinite"/>
             </text>
@@ -371,14 +372,14 @@
             </g>
 
             <g transform="translate(40,0)">
-              <text x="5" y="0"><tspan text-anchor="start" text-anchor="start" dominant-baseline="middle" font-style="italic">:handle-service-not-available</tspan></text>
+              <text x="5" y="0"><tspan text-anchor="start" text-anchor="start" dominant-baseline="middle" font-style="normal">:handle-service-not-available</tspan></text>
 
               <g transform="translate(175,-20)">
                 <use x="0" y="0" xlink:href="#entry"/>
-                <text x="5" y="10" dominant-baseline="central" font-style="italic">:status</text>
+                <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
                 <text x="75" y="10" dominant-baseline="central">503</text>
                 <use x="0" y="20" xlink:href="#entry"/>
-                <text x="5" y="30" dominant-baseline="central" font-style="italic">:message</text>
+                <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
                 <text x="75" y="30" dominant-baseline="central">"Service unavailable."</text>
               </g>
             </g>
@@ -386,11 +387,11 @@
 
           <g transform="translate(0,60)">
 
-            <text x="-25" y="0"><tspan text-anchor="end" font-style="italic" dominant-baseline="central">:authorized?</tspan></text>
+            <text x="-25" y="0"><tspan text-anchor="end" font-style="normal" dominant-baseline="central">:authorized?</tspan></text>
 
             <text x="-25" y="15" visibility="hidden">
               <tspan text-anchor="end" dominant-baseline="central" 
-                     font-style="italic">TRUE</tspan>
+                     font-style="normal">TRUE</tspan>
               <set attributeName="visibility" to="visible" begin="0.4s" dur="indefinite"/>
             </text>
 
@@ -406,14 +407,14 @@
             </g>
 
             <g transform="translate(40,0)">
-              <text x="5" y="0"><tspan font-style="italic" dominant-baseline="middle" text-anchor="start">:handle-unauthorized</tspan></text>
+              <text x="5" y="0"><tspan font-style="normal" dominant-baseline="middle" text-anchor="start">:handle-unauthorized</tspan></text>
 
               <g transform="translate(135,-20)">
                 <use x="0" y="0" xlink:href="#entry"/>
-                <text x="5" y="10" dominant-baseline="central" font-style="italic">:status</text>
+                <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
                 <text x="75" y="10" dominant-baseline="central">401</text>
                 <use x="0" y="20" xlink:href="#entry"/>
-                <text x="5" y="30" dominant-baseline="central" font-style="italic">:message</text>
+                <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
                 <text x="75" y="30" dominant-baseline="central">"Not authorized."</text>
               </g>
             </g>
@@ -424,10 +425,10 @@
 
           <g transform="translate(0,120)">
 
-            <text x="-25" y="0" text-anchor="end" font-style="italic" dominant-baseline="central">:valid-entity-length?</text>
+            <text x="-25" y="0" text-anchor="end" font-style="normal" dominant-baseline="central">:valid-entity-length?</text>
             <text x="-25" y="15" visibility="hidden">
               <tspan text-anchor="end" dominant-baseline="central" 
-                     font-style="italic">TRUE</tspan>
+                     font-style="normal">TRUE</tspan>
               <set attributeName="visibility" to="visible" begin="0.6s" dur="indefinite"/>
             </text>
 
@@ -443,14 +444,14 @@
             </g>
 
             <g transform="translate(40,0)">
-              <text x="5" y="0"><tspan font-style="italic" dominant-baseline="middle" text-anchor="start">:handle-request-entity-too-large</tspan></text>
+              <text x="5" y="0"><tspan font-style="normal" dominant-baseline="middle" text-anchor="start">:handle-request-entity-too-large</tspan></text>
 
               <g transform="translate(185,-20)">
                 <use x="0" y="0" xlink:href="#entry"/>
-                <text x="5" y="10" dominant-baseline="central" font-style="italic">:status</text>
+                <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
                 <text x="75" y="10" dominant-baseline="central">413</text>
                 <use x="0" y="20" xlink:href="#entry"/>
-                <text x="5" y="30" dominant-baseline="central" font-style="italic">:message</text>
+                <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
                 <text x="75" y="30" dominant-baseline="central">"Request Entity Too Large."</text>
               </g>
             </g>
@@ -464,10 +465,10 @@
               <desc>Highlighting the successful result</desc>
             </path>
 
-            <text x="-25" y="0"><tspan text-anchor="end" font-style="italic" dominant-baseline="central">:resource-exists?</tspan><tspan>&#9312;</tspan></text>
+            <text x="-25" y="0"><tspan text-anchor="end" font-style="normal" dominant-baseline="central">:resource-exists?</tspan><tspan>&#9312;</tspan></text>
             <text x="-25" y="15" visibility="hidden">
               <tspan text-anchor="end" dominant-baseline="central" 
-                     font-style="italic">FALSE</tspan>
+                     font-style="normal">FALSE</tspan>
               <set attributeName="visibility" to="visible" begin="0.8s" dur="indefinite"/>
             </text>
 
@@ -482,28 +483,28 @@
             </g>
 
             <g transform="translate(40,0)">
-              <text x="15" y="0"><tspan font-style="italic" dominant-baseline="middle" text-anchor="start">:handle-not-found</tspan><tspan>&#9313;</tspan></text>
+              <text x="15" y="0"><tspan font-style="normal" dominant-baseline="middle" text-anchor="start">:handle-not-found</tspan><tspan>&#9313;</tspan></text>
 
               <g transform="translate(145,-20)">
                 <use x="0" y="0" xlink:href="#entry"/>
-                <text x="5" y="10" dominant-baseline="central" font-style="italic">:status</text>
+                <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
                 <text x="75" y="10" dominant-baseline="central">404</text>
                 <use x="0" y="20" xlink:href="#entry"/>
-                <text x="5" y="30" dominant-baseline="central" font-style="italic">:message</text>
+                <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
                 <text x="75" y="30" dominant-baseline="central">"Not Found."</text>
               </g>
             </g>
           </g>
 
           <g transform="translate(-30,240)">
-            <text x="5" y="0"><tspan font-style="italic" dominant-baseline="middle" text-anchor="start">:handle-ok</tspan></text>
+            <text x="5" y="0"><tspan font-style="normal" dominant-baseline="middle" text-anchor="start">:handle-ok</tspan></text>
 
             <g transform="translate(75,-20)">
               <use x="0" y="0" xlink:href="#entry"/>
-              <text x="5" y="10" dominant-baseline="central" font-style="italic">:status</text>
+              <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
               <text x="75" y="10" dominant-baseline="central">200</text>
               <use x="0" y="20" xlink:href="#entry"/>
-              <text x="5" y="30" dominant-baseline="central" font-style="italic">:message</text>
+              <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
               <text x="75" y="30" dominant-baseline="central">"OK."</text>
             </g>
           </g>
@@ -572,23 +573,23 @@
         replacement functions. It is a map of 5 entries.
       </p>
 
-      <table dir="ltr" width="500" border="1" 
-	     summary="purpose/structure for speech output">
+      <table dir="ltr" border="1">
         <style>
-          tr td:first-child { font-family: monospace; }
+          tr td:first-child { font-family: monospace; text-align: center; padding-top: 5pt; font-weight: bold }
           td ul { list-style-type: none }
+          td { padding-left: 10pt }
         </style>
-	<caption>The structure of the context argument</caption>
-	<colgroup width="50%" />
-	<colgroup id="colgroup" class="colgroup" align="center" 
-		  valign="middle" title="title" width="1*" 
-		  span="2" style="background:#ddd;" />
+<!--	<caption>The structure of the context argument</caption> -->
+	<colgroup width="30%" />
+	<colgroup width="1*" style="background:#ddd;" />
+<!--
 	<thead>
 	  <tr>
 	    <th scope="col">Key</th>
 	    <th scope="col">Description</th>
 	  </tr>
 	</thead>
+-->
 	<tbody>
           <tr>
             <td>:status</td>
@@ -608,7 +609,7 @@
 	  </tr>
           <tr>
             <td>:representation</td>
-            <td>This is a map containing the results of content negotiation. It contains 4 possible values.
+            <td>This is a map containing the results of content negotiation. It contains 4 sub-keys :-
               <ul>
                 <li>:media-type</li>
                 <li>:language</li>
