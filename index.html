@@ -4,11 +4,15 @@
   <head>
     <meta charset="utf-8">
     <title>Liberator</title>
+    <link href="http://fonts.googleapis.com/css?family=Molengo" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Anonymous+Pro:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oregano' rel='stylesheet' type='text/css'>
     <style>
-      body { background: #fdfdff; margin-left: 24pt; margin-top: 24pt; color: black; font-family: Arial; font-size: 11pt }
+      body { background: #fdfdff; margin-left: 24pt; margin-top: 24pt; color: black; font-family: Molengo,Helvetica,Arial; font-size: 11pt }
       #title { display: none; }
       div#logo { float: left; width: 70px; border: 1px solid black; position: absolute }
-      #introduction p { font-size: 120%; margin-top: 3pt; }
+      #introduction p { font-family: Oregano; font-size: 120%; margin-top: 3pt; }
+      h1, h2 { font-family: Oregano; font-weight: normal }
       #introduction p#description { font-size: 160%; margin-top: 3pt; margin-left: 0px }
       section { float: left; width: 600px; margin-left: 100px; clear: left }
       aside { position: absolute; margin-top: 100pt; float: left; width: 320px; margin-left: 720px; border: 1px solid grey; padding: 6pt; background: #cfc }
@@ -19,10 +23,25 @@
       nav li { display: inline; }
       dl.callouts dt { float: left; }
       dl.callouts dd { padding-bottom: 4pt; margin-left: 16pt }
-      pre { background: black; margin-left: 10pt; padding: 6px; overflow: auto; border: 2px solid grey; color: lightgrey; }
+      pre { font-family: 'Anonymous Pro',monospace; background: black; margin-left: 10pt; padding: 6px; overflow: auto; border: 2px solid grey; color: lightgrey; }
       .clojure.symbol { color: #2c2; font-weight: bold }
       .clojure.keyword { color: pink; font-weight: normal }
       .clojure.string { color: orange; font-weight: normal; font-size: 80% }
+      table {
+	border-width: 3px;
+	border-color: #666666;
+	border-collapse: collapse;
+      }
+      td {
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+      }
+      th {
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+      }
     </style>  
   </head>
   <body>
@@ -505,33 +524,44 @@
       message. We can provide a replacement to
       the <em>:handle-not-found</em> handler function when we define the resource, like this:</p>
 
-      <pre><code>(<span class="clojure symbol">liberator/resource</span>
-  <span class="clojure keyword">:handle-not-found</span> (<span class="clojure symbol">fn</span>&#9312; [ctx&#9313;] <span class="clojure string">"Oops, we didn't find anything!"</span>&#9314;))</code></pre>
+      <pre><code>(<span class="clojure symbol">compojure/ANY</span> <span class="clojure string">"/products/:sku"</span> [sku]
+  (<span class="clojure symbol">liberator/resource</span>
+    <span class="clojure keyword">:handle-not-found</span> (<span class="clojure symbol">fn</span>&#9312; [ctx&#9313;] (<span class="clojure symbol">str</span> <span class="clojure string">"No such product: "</span> sku)&#9314;))</code></pre>
       
       <dl class="callouts">
         <dt>&#9312;</dt>
-        <dd>We are providing a replacement function, but we could just as easily specify the string value in this case. Constant values can be used in place of functions where appropriate.</dd> 
+        <dd>We are providing a replacement function, but we could just as easily specify a constant or string value in this case. Constant values can be used in place of functions where appropriate.</dd> 
        <dt>&#9313;</dt>
         <dd>This is the Liberator <em>context argument</em>. We'll come to this shortly.</dd>
         <dt>&#9314;</dt>
-        <dd>We just returned a string here. Liberator is smart enough to turn this into a proper Ring response. 
+        <dd>We returned only a string here. Liberator is smart enough to turn this into a proper Ring response. This is a useful feature of Liberator, that it will coerce whatever you return into a correct Ring response, using whatever information it has already established (via content negotiation, etc.)
       </dl>
 
       <p>So the value which will be returned from the resource will be something like this :-</p>
 
       <pre><code>{:status 404
- :body "Oops, we didn't find anything!"}</code></pre>
+ :body "No such product: 12345"}</code></pre>
 
       <p>This will be processed by Ring to generate the final HTTP response.</p>
 
-    </section>
+      <p>But shouldn't the body be valid HTML? This question assumes
+      that the user-agent is capable of displaying HTML (ie. a web
+      browser) but we don't yet know that. (A <dfn>user-agent</dfn> is
+      the program that sent us the request).</p>
 
-    <section>
-      <h2>Taking things a little further</h2>
-      <p>Now that the basics have been explained, let's build on this
-      example to create a resource that is more likely to be
-      useful.
-      </p>
+      <p>Before we change the response body to valid HTML, let's
+      indicate to the user-agent that we are prepared to do so. We do
+      this via the <i>:available-media-types</i> argument.</p>
+
+      <pre><code>(<span class="clojure symbol">compojure/ANY</span> <span class="clojure string">"/products/:sku"</span> [sku]
+  (<span class="clojure symbol">liberator/resource</span>
+    <span class="clojure keyword">:handle-not-found</span> (<span class="clojure symbol">fn</span> [ctx] (<span class="clojure symbol">str</span> <span class="clojure string">"No such product: "</span> sku)))
+    <span class="clojure keyword">:available-media-types</span> [<span class="clojure string">"text/html"</span> <span class="clojure string">"text/plain;q=0.8"</span>&#9312;])</code></pre>
+
+      <div class="callouts">
+        
+      </div>
+      
     </section>
 
     <section>
@@ -541,19 +571,41 @@
         The context argument is provided as a single argument to all
         replacement functions. It is a map of 5 entries.
       </p>
-      <table>
-        <thead>
-          <tr><td>Keyword</td><td>Description</td></tr>
-        </thead>
-        <tbody>
+
+      <table dir="ltr" width="500" border="1" 
+	     summary="purpose/structure for speech output">
+        <style>
+          tr td:first-child { font-family: monospace; }
+          td ul { list-style-type: none }
+        </style>
+	<caption>The structure of the context argument</caption>
+	<colgroup width="50%" />
+	<colgroup id="colgroup" class="colgroup" align="center" 
+		  valign="middle" title="title" width="1*" 
+		  span="2" style="background:#ddd;" />
+	<thead>
+	  <tr>
+	    <th scope="col">Key</th>
+	    <th scope="col">Description</th>
+	  </tr>
+	</thead>
+	<tbody>
           <tr>
+            <td>:status</td>
+            <td>The response status code</td>
+          </tr>
+          <tr>
+            <td>:message</td>
+            <td>The default status message that usually accompanies the status code</td>
+          </tr>
+	  <tr>
             <td>:request</td>
             <td>The original Ring request</td>
-          </tr>
-          <tr>
+	  </tr>
+	  <tr>
             <td>:resource</td>
             <td>The resource map that defines the Liberator resource</td>
-          </tr>
+	  </tr>
           <tr>
             <td>:representation</td>
             <td>This is a map containing the results of content negotiation. It contains 4 possible values.
@@ -565,23 +617,15 @@
               </ul>
             </td>
           </tr>
-          <tr>
-            <td>:status</td>
-            <td>The response status code</td>
-          </tr>
-          <tr>
-            <td>:message</td>
-            <td>The default status message that usually accompanies the status code</td>
-          </tr>
-        </tbody>
+	</tbody>
       </table>
-        
+
       <h3>The return value</h3>
 
       <p>For decision functions you usually return a boolean. If you
-      return a map, this will get merged into the context given to
-      future functions. Returning a map implies a true result, so if you
-      want to return a false result but also specify a map you can do
+        return a map, this will get merged into the context given to
+        future functions. Returning a map implies a true result, so if you
+        want to return a false result but also specify a map you can do
       this by returning a vector pair containing the map, ie. [false
       {}] </p>
 
