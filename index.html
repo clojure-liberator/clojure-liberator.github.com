@@ -858,6 +858,29 @@
 
     </section>
 
+    <section id=getting-started>
+      <h2>Getting started</h2>
+
+      <p>Create a new project
+
+      <pre>> <kbd>lein new myproj</kbd></pre>
+
+      <p>Edit the <code>project.clj</code> file so that the <code>liberator</code> dependency is added.
+
+      <pre><code>(<span class="clojure symbol">defproject</span> myproj <span class="clojure string">"0.0.1"</span>
+   <span class="clojure keyword">:dependencies</span> [...
+                  [liberator <span class="clojure string">"0.5.0"</span>]]</code></pre>
+
+      <p>Start the REPL
+
+      <pre>> <kbd>lein repl</kbd></pre>
+
+      <p>Import liberator
+
+      <pre>REPL> <kbd>(use 'liberator.core)</kbd></pre>
+
+    </section>
+
     <section id=development>
       <h2>How to contribute to Liberator</h2>
 
