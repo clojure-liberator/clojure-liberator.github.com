@@ -159,6 +159,7 @@
 
       <p>This is how it all fits together :-
 
+        <figure>
         <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="180">
           <defs>
             <style type="text/css">
@@ -235,6 +236,7 @@
           </circle>
 
         </svg>
+        </figure>
 
       <p>(If you need more information about adding the web server component, see the Ring documentation <a href="#">here</a>).
 
@@ -275,6 +277,7 @@
         determine the response status and the <dfn>handler function</dfn>
         that will produce the response.
 
+        <figure>
         <svg id="flow-diagram" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="330">
           <defs>
             <style type="text/css">
@@ -499,6 +502,7 @@
           </g>
 
         </svg>
+        </figure>
 
         <script>
           pressdo = function() {
@@ -644,7 +648,16 @@
 
         <h3>Function reference</h3>
 
-        <div style="height: 400px; overflow: auto">
+        <script>
+          toggle_advanced = function(b) {
+            if (b.checked) disp = "none"; else disp = "table-row"; 
+            Array.prototype.forEach.call(document.querySelectorAll("#overrides .advanced"), 
+                                         function(e) { e.setAttribute("style", "display: " + disp); });
+          }
+        </script>
+
+        <input checked name="adv" type="checkbox" onclick="toggle_advanced(this)">Hide advanced functions</button>
+
         <table id=overrides dir=ltr border=1 >
           <style>
             #overrides tr td:first-child { text-align: left; padding-top: 5pt; font-weight: bold; background: black }
@@ -655,6 +668,7 @@
             #overrides td.handler { color: green }
             #overrides td.action { color: red }
             #overrides td.declaration { color: grey }
+            #overrides tr.advanced { display: none }
           </style>
           <colgroup width=30% />
           <colgroup width=20% />
@@ -669,192 +683,51 @@
             <tr><td class="declaration">:available-encodings<td>declaration<td></tr>
             <tr><td class="declaration">:available-languages<td>declaration<td></tr>
             <tr><td class="declaration">:available-media-types<td>declaration<td></tr>
-            <tr><td class="decision">:can-post-to-missing?<td>decision<td></tr>
-            <tr><td class="decision">:charset-available?<td>decision<td></tr>
-            <tr><td class="decision">:conflict?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision">:can-post-to-missing?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision">:charset-available?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision">:conflict?<td>decision<td></tr>
             <tr><td class="action">:delete!<td>action<td></tr>
-            <tr><td class="decision">:encoding-available?<td>decision<td></tr>
-            <tr><td class="declaration">:etag<td>declaration<td></tr>
-            <tr><td class="decision">:existed?<td>decision<td></tr>
-            <tr><td class="decision">:exists?<td>decision<td></tr>
-            <tr><td class="handler">:handle-created<td>handler<td></tr>
-            <tr><td class="handler">:handle-gone<td>handler<td></tr>
-            <tr><td class="handler">:handle-malformed<td>handler<td></tr>
-            <tr><td class="handler">:handle-method-not-allowed<td>handler<td></tr>
-            <tr><td class="handler">:handle-multiple-representations<td>handler<td></tr>
-            <tr><td class="handler">:handle-multiple-representations<td>handler<td></tr>
-            <tr><td class="handler">:handle-no-content<td>handler<td></tr>
-            <tr><td class="handler">:handle-not-acceptable<td>handler<td></tr>
-            <tr><td class="handler">:handle-not-found<td>handler<td></tr>
-            <tr><td class="handler">:handle-not-found<td>handler<td></tr>
-            <tr><td class="handler">:handle-not-implemented<td>handler<td></tr>
-            <tr><td class="handler">:handle-not-modified<td>handler<td></tr>
+            <tr class="advanced"><td class="decision">:encoding-available?<td>decision<td></tr>
+            <tr class="advanced"><td class="declaration">:etag<td>declaration<td></tr>
+            <tr class="advanced"><td class="decision">:existed?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision">:exists?<td>decision<td></tr>
+            <t class="advanced"r><td class="handler">:handle-created<td>handler<td></tr>
+            <t class="advanced"r><td class="handler">:handle-gone<td>handler<td></tr>
+            <t class="advanced"r><td class="handler">:handle-malformed<td>handler<td></tr>
+            <t class="advanced"r><td class="handler">:handle-method-not-allowed<td>handler<td></tr>
+            <t class="advanced"r><td class="handler">:handle-multiple-representations<td>handler<td></tr>
+            <t class="advanced"r><td class="handler">:handle-no-content<td>handler<td></tr>
+            <t class="advanced"r><td class="handler">:handle-not-acceptable<td>handler<td></tr>
+            <t class="advanced"r><td class="handler">:handle-not-found<td>handler<td></tr>
+            <t class="advanced"r><td class="handler">:handle-not-implemented<td>handler<td></tr>
+            <t class="advanced"r><td class="handler">:handle-not-modified<td>handler<td></tr>
             <tr><td class="handler">:handle-ok<td>handler<td></tr>
-            <tr><td class="handler">:handle-precondition-failed<td>handler<td></tr>
-            <tr><td class="handler">:handle-request-entity-too-large<td>handler<td></tr>
-            <tr><td class="handler">:handle-service-not-available<td>handler<td></tr>
+            <t class="advanced"r><td class="handler">:handle-precondition-failed<td>handler<td></tr>
+            <t class="advanced"r><td class="handler">:handle-request-entity-too-large<td>handler<td></tr>
+            <t class="advanced"r><td class="handler">:handle-service-not-available<td>handler<td></tr>
             <tr><td class="handler">:handle-unsupported-media-type<td>handler<td></tr>
-            <tr><td class="handler">:handle-uri-too-long<td>handler<td></tr>
-            <tr><td class="decision">:known-content-type?<td>decision<td></tr>
-            <tr><td class="decision">:known-method?<td>decision<td></tr>
-            <tr><td class="decision">:language-available?<td>decision<td></tr>
-            <tr><td class="decision">:malformed?<td>decision<td></tr>
-            <tr><td class="decision">:method-allowed?<td>decision<td></tr>
-            <tr><td class="decision">:multiple-representations?<td>decision<td></tr>
-            <tr><td class="decision">:new?<td>decision<td></tr>
-            <tr><td class="action">:post!<td>action<td></tr>
-            <tr><td class="decision">:post-redirect?<td>decision<td></tr>
-            <tr><td class="decision">:post-to-existing?<td>decision<td></tr>
+            <t class="advanced"r><td class="handler">:handle-uri-too-long<td>handler<td></tr>
+            <tr class="advanced"><td class="decision">:known-content-type?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision" >:known-method?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision">:language-available?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision">:malformed?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision">:method-allowed?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision">:multiple-representations?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision">:new?<td>decision<td></tr>
+            <tr class="advanced"><td class="action">:post!<td>action<td></tr>
+            <tr class="advanced"><td class="decision">:post-redirect?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision">:post-to-existing?<td>decision<td></tr>
             <tr><td class="action">:put!<td>action<td></tr>
-            <tr><td class="decision">:put-to-different-url?<td>decision<td></tr>
-            <tr><td class="decision">:respond-with-entity?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision">:put-to-different-url?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision">:respond-with-entity?<td>decision<td></tr>
             <tr><td class="declaration">:see-other<td>declaration<td></tr>
             <tr><td class="decision">:service-available?<td>decision<br>(Defaults to true)<td>Return false if, for some reason, you are no longer able to fulfill any requests, perhaps due to capacity issues. (You've just appeared on Hacker News!)</tr>
-            <tr><td class="handler">:unauthorized<td>handler<td></tr>
-            <tr><td class="handler">:unknown-method<td>handler<td></tr>
-            <tr><td class="decision">:uri-too-long?<td>decision<td></tr>
-            <tr><td class="decision">:valid-content-header?<td>decision<td></tr>
-            <tr><td class="decision">:valid-entity-length?<td>decision<td></tr>
+            <tr class="advanced"><td class="handler">:unauthorized<td>handler<td></tr>
+            <tr class="advanced"><td class="handler">:unknown-method<td>handler<td></tr>
+            <tr class="advanced"><td class="decision">:uri-too-long?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision">:valid-content-header?<td>decision<td></tr>
+            <tr class="advanced"><td class="decision">:valid-entity-length?<td>decision<td></tr>
         </table>
-        </div>
-
-      <p>TODO: A diagram showing all the parts of the full decision tree.
-
-
-      <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="330">
- <!-- ECMAScript to change the radius with each click -->
- <script type="application/ecmascript"> <![CDATA[
-    function createLabel(label) {
-      txt = document.createElementNS("http://www.w3.org/2000/svg", "text");
-      txt.setAttribute("x", "-25");
-      txt.setAttribute("y", "0");
-      tsp = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-      tsp.setAttribute("text-anchor", "end");
-      tsp.setAttribute("dominant-baseline", "central");
-      tsp.setAttribute("font-style", "normal");
-      tsp.appendChild(document.createTextNode(label));
-      txt.appendChild(tsp);
-      return txt;
-    }
-
-    function createDecision() {
-      g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-      d = document.createElementNS("http://www.w3.org/2000/svg", "use");
-      d.setAttribute("x", "0");
-      d.setAttribute("y", "0");
-      d.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#decision");
-      g.appendChild(d);
-      return g;
-    }
-
-    function build(el) {
-      g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-      g.setAttribute("transform", "translate(0, 70)");
-      g.appendChild(createLabel(":service-available?"));
-      g.appendChild(createDecision());
-      el.appendChild(g);
-    }
-  ]]> </script>
-
-        <defs>
-          <style type="text/css">
-              <![CDATA[
-      text {
-        font-size: 9pt;
-        font-family: Molengo,Arial;
-      }
-    ]]>
-          </style>
-          <g id="handler">
-            <rect y="-15" width="180" height="30" stroke="black" stroke-width="1px" fill="#acccff"/>
-            <path d="M 10,-15 l 0,30 M 170,-15 l 0,30" stroke="black"/>
-          </g>
-
-            <g id="decision">
-              <path d="M 0,-20 l 20,20 -20,20 -20,-20 Z" stroke-width="2px" stroke="black" fill="none"/>
-            </g>
-
-            <g id="entry">
-              <rect x="0" y="0" width="240" height="20" stroke="#c0c0c0" stroke-width="1" fill="none"/>
-              <path d="M70,0 v20" stroke="#c0c0c0" stroke-width="1"/>
-            </g>
-
-            <marker id="darkorange-marker"
-                    viewBox="0 0 10 10" refX="5" refY="5" 
-                    markerUnits="strokeWidth"
-                    markerWidth="4" markerHeight="3" fill="darkorange"
-                    orient="auto">
-              <path d="M 0 0 L 10 5 L 0 10 z" />
-            </marker>
-
-            <marker id="darkblue-marker"
-                    viewBox="0 0 10 10" refX="5" refY="5" 
-                    markerUnits="strokeWidth"
-                    markerWidth="4" markerHeight="3" fill="purple"
-                    orient="auto">
-              <path d="M 0 0 L 10 5 L 0 10 z" />
-            </marker>
-            <marker id="darkgreen-marker"
-                    viewBox="0 0 10 10" refX="5" refY="5" 
-                    markerUnits="strokeWidth"
-                    markerWidth="4" markerHeight="3" fill="darkgreen"
-                    orient="auto">
-              <path d="M 0 0 L 10 5 L 0 10 z" />
-            </marker>
-            <marker id="grey-marker"
-                    viewBox="0 0 10 10" refX="5" refY="5" 
-                    markerUnits="strokeWidth"
-                    markerWidth="4" markerHeight="3" fill="grey"
-                    orient="auto">
-              <path d="M 0 0 L 10 5 L 0 10 z" />
-            </marker>
-            <marker id="red-marker"
-                    viewBox="0 0 10 10" refX="5" refY="5" 
-                    markerUnits="strokeWidth"
-                    markerWidth="4" markerHeight="3" fill="red"
-                    orient="auto">
-              <path d="M 0 0 L 10 5 L 0 10 z" />
-            </marker>
-
-          </defs>
-
-          <g onload="build(this)" transform="translate(135,55)">
-
-            <path d="M 0,-50 v 25" stroke-width="3px" stroke="purple" marker-end="url(#darkblue-marker)"/>
-
-            <text x="-15" y="-40">
-              <tspan text-anchor="end" dominant-baseline="central" 
-                     font-style="normal">START</tspan>
-            </text>
-
-            <g transform="translate(0,0)">
-              <text x="-25" y="0">
-                <tspan text-anchor="end" dominant-baseline="central" 
-                       font-style="normal">:service-available?</tspan>
-              </text>
-
-              <g>
-                <use id="s1" x="0" y="0" xlink:href="#decision"/>
-                <path d="M 20,0 h 15" stroke-width="3px" stroke="red" marker-end="url(#red-marker)"/>
-                <path d="M 0,20 v 15" stroke-width="5px" stroke="darkgreen" marker-end="url(#darkgreen-marker)"/>
-              </g>
-
-              <g transform="translate(40,0)">
-                <text x="5" y="0"><tspan text-anchor="start" text-anchor="start" dominant-baseline="middle" font-style="normal">:handle-service-not-available</tspan></text>
-
-                <g transform="translate(175,-20)">
-                  <use x="0" y="0" xlink:href="#entry"/>
-                  <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
-                  <text x="75" y="10" dominant-baseline="central">503</text>
-                  <use x="0" y="20" xlink:href="#entry"/>
-                  <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
-                  <text x="75" y="30" dominant-baseline="central">"Service unavailable."</text>
-                </g>
-              </g>
-            </g>
-          </g>
-        </svg>
-
 
     </section>
 
@@ -917,6 +790,10 @@
 
     </section>
 -->
+
+  <footer>
+    Copyright &#169; Philipp Meier. All Rights Reserved.
+  </footer>
 
   </body>
 </html>
