@@ -5,7 +5,9 @@
     <meta charset=utf-8>
     <title>Liberator</title>
     <!-- http://www.google.com/webfonts#UsePlace:use/Collection:Molengo|Anonymous+Pro:400,700|Oregano -->
+<!--
     <link href='http://fonts.googleapis.com/css?family=Molengo|Anonymous+Pro:400,700|Oregano' rel='stylesheet' type='text/css'>
+-->
     <style>
       body { background: #fdfdff; margin-left: 24pt; margin-top: 24pt; color: black; font-family: Molengo,Helvetica,Arial; font-size: 11pt }
       #title { display: none; }
@@ -44,9 +46,46 @@
       kbd {
       font-weight: bold;
       }
+      #banner {
+      background: #ffd0f0;
+      opacity: 1;
+      margin-bottom: 20px;
+      min-height: 40px;
+      }
+      #banner p {
+      padding: 2pt;
+      margin: 2pt;
+      color: black;
+      font-size: 14pt;
+      opacity: 1;
+      }
+      .hidden {
+      display: none;
+      }
     </style>  
   </head>
   <body>
+
+    <script>
+      show_banner = function() {
+        document.querySelector("#banner").classList.remove("hidden");
+      }
+      hide_banner = function() {
+        document.querySelector("#banner").classList.add("hidden");
+      }
+    </script>
+
+    <div id=banner class=hidden>
+      <p>Just to let you know, this is an <span style="color: red; font-style: italic">unofficial</span> version of the Liberator site. The official version is
+      at <a href="http://clojure-liberator.github.com/">http://clojure-liberator.github.com/</a>. </p>
+      <p style="font-size: smaller"><a href="javascript:hide_banner()">Hide</a></p>
+    </div>
+
+    <script>
+      if (location.hostname != "clojure-liberator.github.com") {
+        show_banner();
+      }
+    </script>
 
     <a href="https://github.com/clojure-liberator/liberator">
       <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub">
