@@ -815,22 +815,50 @@
     </section>
 
 
-<!--
     <section>
       <a name=faq/>
       <h2>F.A.Q.</h2>
 
       <dl>
+
         <dt>Why isn't Liberator simply a set of Ring middleware?
-          <dd>Answer:
+
+          <dd>Decision functions in Liberator aren't Ring middleware
+          because they don't return Ring responses. Instead, they return
+          the decision (true or false), plus optionally some extra data
+          to merge with the context. <p>Earlier versions of Liberator
+          strived to create a similar system using just Ring middleware
+          functions. However, this was abandoned for a number of
+          reasons. First, when you need one Ring middleware function to
+          access the data derived by another, <em>order begins to
+          matter</em> and dependencies creep in. Also, a threaded
+          nesting of Ring middleware assumes that the decision flow is
+          linear. The complete decision flow for HTTP is non-linear and
+          splits/branches at various points.</dd>
+
+        <dt>How does Liberator interact with routing engines such as
+        Compojure?
+
+          <dd>You should use compojure's <tt>ANY</tt> only so Liberator
+            gets to handle every method.</dd>
+
+        <dt>What are the <tt>:post!</tt> <tt>:put!</tt>
+        and <tt>:delete!</tt> supposed to represent. Since they are
+        actions, they cannot return anything.
+
+          <dd>These actions should produce intentional
+          side-effects. The <tt>!</tt> suffix is a LISP convention to
+          indicate that system state will change. For example, ou might
+          implement a put! by updating a row in a database. They don't
+          return values, if they did then there would be a mixing of
+          concerns.
+
       </dl>
-
     </section>
--->
 
-  <footer>
-    Copyright &#169; Philipp Meier. All Rights Reserved.
-  </footer>
+    <footer>
+      Copyright &#169; Philipp Meier. All Rights Reserved.
+    </footer>
 
   </body>
 </html>
