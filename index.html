@@ -620,6 +620,34 @@
     </section>
 
     <section>
+      <h2>Understanding the flowchart</h2>
+
+      <p>Decisions are made according to a flowchart which determines
+      the order in which decisions and places where the path splits into
+      two.
+
+      <p>The flowchart always ends at a handler (at the bottom of the
+      chart) which determines the HTTP status code in the response.
+
+      <p>On deciding how to implemented the behaviour you have designed
+      for your resource you will often have this diagram in front of you
+      to decide which functions to replace.
+
+      <p>
+        <a href="http://philipp.meier.name/t/y.png">
+          <figure>
+            <figcaption>The Liberator flowchart (click to expand)</figcaption>
+            <img src="http://philipp.meier.name/t/y.png" width="600"/>
+          </figure>
+        </a>
+      </p>
+        
+      <p><small>Attribution: This diagram aligns with
+      the <a href="http://wiki.basho.com/Webmachine-Diagram.html">one
+      created by Alan Dean for webmachine</a>. We have made a few small changes to the naming of decisions (so that they can be represented by Clojure keys) and to include the side-effecting <tt>post!</tt>, <tt>put!</tt> and <tt>delete!</tt> actions.</small>
+    </section>
+
+    <section>
       <h2>Replacing functions</h2>
 
       <h3>The context argument</h3>
@@ -668,12 +696,16 @@
 
         <h3>The return value</h3>
 
-      <p>For decision functions you usually return a boolean. If you
-        return a map, this will get merged into the context given to
-        future functions. Returning a map implies a true result, so if you
-        want to return a false result but also specify a map you can do
-        this by returning a vector pair containing the map, ie. [false
-        {}]
+      <p>For decision functions you usually return a boolean. However,
+      sometimes you want to store some state in the context to pass to
+      the next decisions and ultimately to the handler. 
+
+      <p>
+        If you return a map, this will get merged into the context given
+        to future functions. Returning a map implies a true result, so
+        if you want to return a false result but also specify a map you
+        can do this by returning a vector pair containing the map,
+        ie. [false {}]
 
       <p>For handler functions you have more flexibility. If you return
         a map, it will be treated as a Ring response map. Anything else
