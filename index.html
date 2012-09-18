@@ -856,43 +856,34 @@
       <h3>Swank users</h3>
 
       <p>If you code in Emacs (with Slime) and want to use swank, ensure
-      you have the lein swank plugin installed. For example, in
-      your <tt>$HOME/.lein/profiles.clj</tt>.
+      you have the lein swank plugin installed. For example, ensure you have included the lein-swank plugin in your <tt>$HOME/.lein/profiles.clj</tt> file :- 
 
       <pre>
-{:user {:plugins [[lein-swank "1.4.4"]]}}
+{<span class="clojure keyword">:user</span> {<span class="clojure keyword">:plugins</span> [[<span class="clojure symbol">lein-swank</span> <span class="clojure string">"1.4.4"</span>]]}}
       </pre>
 
-      <p>Use leiningen to start the swank server
+      <p>Use leiningen to start the swank server :-
 
       <pre>> <kbd>lein swank</kbd></pre>
 
-      <p>In Emacs, execute <tt>M-x slime-connect</tt> and wait for the REPL to start. To start the examples server, do the following: 
+      <p>In Emacs, execute <tt>M-x slime-connect</tt> and wait for the REPL to start. To start the examples server, type the following commands into the Emacs REPL :-
 
       <pre>
-(require 'examples.server)
-(examples.server/-main)
+user> <kbd>(require 'examples.server)</kbd>
+user> <kbd>(examples.server/-main)</kbd>
       </pre>
      
-      <p>Now go to <tt>examples/clj/examples.clj</tt> and add a new route to the <tt>assemble-routes</tt> function. Happy hacking!</p>
+      <p>Now open <tt>examples/clj/examples.clj</tt> and add a new route to the top of the <tt>assemble-routes</tt> function. Re-eval the buffer and test in the browser. Happy hacking!</p>
 
 <pre>
-(defn assemble-routes []
+(<span class="clojure symbol">defn</span> assemble-routes []
   (->
-   (routes
-    (create-cljs-route "/cljs")
-    (ANY "/hello-world" [] hello-world)
-    (ANY "/hello-george" [] hello-george)
-    (ANY "/olympics/index" [] olympic-games-index)
-    (ANY "/olympics/index-fancy" [] olympic-games-index-fancy)
-    (ANY "/drag-drop" [] drag-drop)
-    (ANY "/drag-drop/athletes" [] athletes-resource)
-
-    (ANY "/static/*" [] static)
-    (ANY ["/olympics/:stem" :stem #"m/.*"] [stem]
-         (-> olympic-games
-             (wrap-binder ::id (str "/" stem)))))
-   (wrap-trace-as-response-header)))
+   (<span class="clojure symbol">routes</span>
+    
+    <span class="code highlight">(<span class="clojure symbol">ANY</span> <span class="clojure string">"/my-example"</span> [] (<span class="clojure symbol">resource</span> <span class="clojure keyword">:handle-ok</span> <span class="clojure string">"My example..."</span>))</span>
+    (<span class="clojure symbol">ANY</span> <span class="clojure string">"/hello-world"</span> [] <span class="clojure symbol">hello-world</span>)
+    ...
+))
 </pre>
       
     </section>
