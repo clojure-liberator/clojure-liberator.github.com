@@ -853,8 +853,49 @@
 
       <p>This will start a web server on port 8000 (but you can specify a alternative port with an argument, eg. <kbd>lein examples 8001</kbd>). Alternatively you can run the web server with <kbd>lein ring server</kbd>).
 
-    </section>
+      <h3>Swank users</h3>
 
+      <p>If you code in Emacs (with Slime) and want to use swank, ensure
+      you have the lein swank plugin installed. For example, in
+      your <tt>$HOME/.lein/profiles.clj</tt>.
+
+      <pre>
+{:user {:plugins [[lein-swank "1.4.4"]]}}
+      </pre>
+
+      <p>Use leiningen to start the swank server
+
+      <pre>> <kbd>lein swank</kbd></pre>
+
+      <p>In Emacs, execute <tt>M-x slime-connect</tt> and wait for the REPL to start. To start the examples server, do the following: 
+
+      <pre>
+(require 'examples.server)
+(examples.server/-main)
+      </pre>
+     
+      <p>Now go to <tt>examples/clj/examples.clj</tt> and add a new route to the <tt>assemble-routes</tt> function. Happy hacking!</p>
+
+<pre>
+(defn assemble-routes []
+  (->
+   (routes
+    (create-cljs-route "/cljs")
+    (ANY "/hello-world" [] hello-world)
+    (ANY "/hello-george" [] hello-george)
+    (ANY "/olympics/index" [] olympic-games-index)
+    (ANY "/olympics/index-fancy" [] olympic-games-index-fancy)
+    (ANY "/drag-drop" [] drag-drop)
+    (ANY "/drag-drop/athletes" [] athletes-resource)
+
+    (ANY "/static/*" [] static)
+    (ANY ["/olympics/:stem" :stem #"m/.*"] [stem]
+         (-> olympic-games
+             (wrap-binder ::id (str "/" stem)))))
+   (wrap-trace-as-response-header)))
+</pre>
+      
+    </section>
 
     <section>
       <a name=faq/>
