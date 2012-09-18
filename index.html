@@ -816,6 +816,8 @@
     <section id=getting-started>
       <h2>Getting started</h2>
 
+      <p>For this bit, please use <a href="http://leiningen.org">leiningen 2</a>.</p>
+      
       <p>Create a new project
 
       <pre>> <kbd>lein new myproj</kbd></pre>
@@ -834,21 +836,6 @@
 
       <pre>REPL> <kbd>(use 'liberator.core)</kbd></pre>
 
-    </section>
-
-    <section id=development>
-      <h2>How to contribute to Liberator</h2>
-
-      <p>First, clone the official repository (or fork it!).
-
-      <pre>> <kbd>git clone https://github.com/clojure-liberator/liberator.git</kbd></pre>
-
-      <h3>Running the tests</h3>
-
-      <p>Liberator uses <a href="https://github.com/marick/Midje/">Midje</a> for testing. You can run all the tests like this :-
-
-      <pre>> <kbd>lein midje</kbd></pre>
-
       <h3>Running the examples</h3>
 
       <p>A set of examples is included. If you want to see the examples in a browser, run
@@ -866,7 +853,7 @@
 {<span class="clojure keyword">:user</span> {<span class="clojure keyword">:plugins</span> [[<span class="clojure symbol">lein-swank</span> <span class="clojure string">"1.4.4"</span>]]}}
       </pre>
 
-      <p>Use leiningen to start the swank server :-
+      <p>Now you can use leiningen to start the swank server :-
 
       <pre>> <kbd>lein swank</kbd></pre>
 
@@ -890,6 +877,21 @@ user> <kbd>(examples.server/-main)</kbd>
 ))
 </pre>
       
+    </section>
+
+    <section id=development>
+      <h2>How to contribute to Liberator</h2>
+
+      <p>First, clone the official repository (or fork it!).
+
+      <pre>> <kbd>git clone https://github.com/clojure-liberator/liberator.git</kbd></pre>
+
+      <h3>Running the tests</h3>
+
+      <p>Liberator uses <a href="https://github.com/marick/Midje/">Midje</a> for testing. You can run all the tests like this :-
+
+      <pre>> <kbd>lein midje</kbd></pre>
+
     </section>
 
     <section>
@@ -938,7 +940,7 @@ user> <kbd>(examples.server/-main)</kbd>
       <h2>Credits</h2>
 
       <p>Liberator (formerly known as compojure-rest) was written by
-        Phillipp Meier. Other contributors include Malcolm Sparks and
+        Phillipp Meier. Other contributors include <a href="http://blog.malcolmsparks.com">Malcolm Sparks</a> and
         James Henderson. Thanks to Eric Normand for asking some good
         questions.
 
