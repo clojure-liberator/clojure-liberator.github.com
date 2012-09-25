@@ -7,21 +7,80 @@
     <!-- http://www.google.com/webfonts#UsePlace:use/Collection:Molengo|Anonymous+Pro:400,700|Oregano -->
     <link href='http://fonts.googleapis.com/css?family=Molengo|Anonymous+Pro:400,700|Oregano' rel='stylesheet' type='text/css'>
     <style>
-      body { background: #fdfdff; margin-left: 24pt; margin-top: 24pt; color: black; font-family: Molengo,Helvetica,Arial; font-size: 11pt }
+      body { 
+      background: #fafafa; 
+      margin-left: 24pt; 
+      margin-top: 24pt; 
+      color: black; 
+      font-family: Molengo,Helvetica,Arial; 
+      font-size: 11pt;
+      }
+
       #title { display: none; }
       div#logo { float: left; width: 70px; border: 1px solid black; position: absolute }
       #introduction p { font-family: Oregano, cursive; font-size: 20pt; margin-top: 3pt; }
-      h1, h2 { font-family: Oregano, cursive; font-weight: normal }
-      h2 { font-size: 20pt }
-      #introduction p#description { font-size: 160%; margin-top: 3pt; margin-left: 0px }
-      section { float: left; width: 720px; margin-left: 100px; clear: left }
-      aside { position: absolute; margin-top: 100pt; float: left; width: 320px; margin-left: 840px; border: 1px solid grey; padding: 6pt; background: #cfc }
+
+      h1, h2 { 
+      font-family: Oregano, cursive; 
+      font-weight: normal;
+      text-shadow: 1px 1px 6px #ddd;
+      }
+      h2 { 
+      font-size: 20pt 
+      }
+      #introduction p#description { 
+      font-size: 160%; 
+      margin-top: 6pt; 
+      margin-left: 0px;
+      text-shadow: 1px 1px 6px #ddd;
+      }
+
+
+
+      #content {
+      float: left;
+      border-left: 1px solid grey;
+      padding-bottom: 40px;
+      }
+
+      section { 
+      width: 620px; 
+      margin-left: 100px; 
+      margin-right: 30pt 
+      }
+
+      #asides {
+      margin: 4em 0 0 0;
+      float: left;
+      width: 320px;
+      }
+
+      aside { 
+      background: #4f4; 
+      margin: 10pt 0 30pt 0;
+      font-size: 80%; 
+      padding: 6pt 10pt 10pt 10pt; 
+      box-shadow: 6px 6px 17px #aa8; 
+      text-align: justify;
+      }
+
+      aside h2 { font-size: 14pt; }
+
       svg { border: 0px dotted black }
       div#logo svg { border: none }
       div#status { margin-left: 40pt; float: left }
       dl.callouts dt { float: left; }
       dl.callouts dd { font-size: 80%; padding-bottom: 4pt; margin-left: 16pt }
-      pre { font-family: 'Anonymous Pro',monospace; background: black; margin-left: 10pt; padding: 6px; overflow: auto; border: 2px solid grey; color: lightgrey; color: #2c2 }
+      pre { 
+      font-family: 'Anonymous Pro', monospace; 
+      background: black; 
+      margin-left: 10pt; 
+      padding: 6px; 
+      overflow: auto; 
+      border: 2px solid grey; 
+      color: lightgrey; 
+      color: #2c2 
+      }
       .clojure.symbol { color: #2c2; font-weight: bold }
       .clojure.keyword { color: pink; font-weight: normal }
       .clojure.string { color: orange; font-weight: normal; font-size: 80% }
@@ -44,12 +103,15 @@
       kbd {
       font-weight: bold;
       }
+
       #banner {
-      background: #ffd0f0;
+      background: #ff4;
       opacity: 1;
       margin-bottom: 20px;
       min-height: 40px;
+      box-shadow: 6px 6px 17px #aa8; 
       }
+
       #banner p {
       padding: 2pt;
       margin: 2pt;
@@ -65,8 +127,13 @@
       font-size: 14pt;
       }
       footer {
-      position: absolute;
-      right: 10px;
+      clear: left;
+      float: left;
+      width: 90%;
+      text-align: right;
+      border-top: 1px solid #aaa;
+      padding-top: 2pt 2pt 2pt 0pt;
+      margin: 0px 10px 10px 0px;
       }
     </style>  
   </head>
@@ -74,22 +141,22 @@
 
     <script>
       show_banner = function() {
-        document.querySelector("#banner").classList.remove("hidden");
+      document.querySelector("#banner").classList.remove("hidden");
       }
       hide_banner = function() {
-        document.querySelector("#banner").classList.add("hidden");
+      document.querySelector("#banner").classList.add("hidden");
       }
     </script>
 
     <div id=banner class=hidden>
       <p>Just to let you know, this is an <span style="color: red; font-style: italic">unofficial</span> version of the Liberator site. The official version is
-      at <a href="http://clojure-liberator.github.com/">http://clojure-liberator.github.com/</a>. </p>
+        at <a href="http://clojure-liberator.github.com/">http://clojure-liberator.github.com/</a>. </p>
       <p style="font-size: smaller"><a href="javascript:hide_banner()">Hide</a></p>
     </div>
 
     <script>
       if (location.hostname != "clojure-liberator.github.com") {
-        show_banner();
+      show_banner();
       }
     </script>
 
@@ -139,812 +206,849 @@
       </svg>
     </div>
 
-    <section id=introduction>
-      <h1 id=title>Liberator</h1>
+    <div id=content>
 
-      <p id=description>Liberator is a free, open-source web library for the Clojure programming language with an emphasis on <abbr title="Representational State Transfer">REST</abbr>. 
+      <section id=introduction>
+        <h1 id=title>Liberator</h1>
 
-    </section>
-        
-    <div id="status">
-      <p>Latest version: <a href="https://clojars.org/liberator">0.5.0</a>
-    </div>
+        <p id=description>Liberator is a free, open-source web library for the Clojure programming language with an emphasis on <abbr title="Representational State Transfer">REST</abbr>. 
 
-    <section>
-      <h2>What it is</h2>
-      <p>
-        Liberator is a Clojure library that helps you expose your data
-        as REST resources while automatically complying with all the
-        relevant requirements of HTTP specification
-        (<a href="http://www.ietf.org/rfc/rfc2616.txt">RFC-2616</a>). Your
-        resources will automatically gain useful HTTP features, such as
-        caching and content negotiation. Liberator is loosely modeled on
-        <a href="http://wiki.basho.com/Webmachine.html">webmachine</a>.
-    </section>
+      </section>
+      
+      <section>
+        <h2>What it is</h2>
+        <p>
+          Liberator is a Clojure library that helps you expose your data
+          as REST resources while automatically complying with all the
+          relevant requirements of HTTP specification
+          (<a href="http://www.ietf.org/rfc/rfc2616.txt">RFC-2616</a>). Your
+          resources will automatically gain useful HTTP features, such as
+          caching and content negotiation. Liberator is loosely modeled on
+          <a href="http://wiki.basho.com/Webmachine.html">webmachine</a>.
 
-    <section>
-      <h2>Where it fits</h2>
+      </section>
 
-      <p>
-        Liberator is not a full-featured web framework like
-        <a href="http://www.webnoir.org">Noir</a>. Rather, Liberator forms part of a composition of other components. So be prepared to ...
-        <ul>
-          <li>Add a routing library, like <a href="https://github.com/weavejester/compojure">Compojure</a> or <a href="https://github.com/cgrand/moustache">Moustache</a>
-          <li>Add a presentation library, like <a href="https://github.com/weavejester/hiccup">Hiccup</a>
-          <li>Add some miscellaneous Ring middleware
-        </ul>
+      <section id=status>
+        <h2>Status</h2>
+        <p>Latest version: <a href="https://clojars.org/liberator">0.5.0</a>
+      </section>
 
-      <p>If you are familiar with Ring, Liberator <dfn>resources</dfn>
-        are Ring handlers. A Ring handler is a Clojure function that
-        takes a map as an argument (representing the web request) and
-        returns another map representing the web response.
-        
-      <p>You connect a Liberator resource to a route. For example,
-        if you use Compojure as your routing library, you would connect things like this :-
+      <section>
+        <h2>Where it fits</h2>
 
-        <pre><code>(<span class="clojure symbol">ns</span> com.acme
+        <p>
+          Liberator is not a full-featured web framework like
+          <a href="http://www.webnoir.org">Noir</a>. Rather, Liberator forms part of a composition of other components. So be prepared to ...
+          <ul>
+            <li>Add a routing library, like <a href="https://github.com/weavejester/compojure">Compojure</a> or <a href="https://github.com/cgrand/moustache">Moustache</a>
+            <li>Add a presentation library, like <a href="https://github.com/weavejester/hiccup">Hiccup</a>
+            <li>Add some miscellaneous Ring middleware
+          </ul>
+
+        <p>If you are familiar with Ring, Liberator <dfn>resources</dfn>
+          are Ring handlers. A Ring handler is a Clojure function that
+          takes a map as an argument (representing the web request) and
+          returns another map representing the web response.
+          
+        <p>You connect a Liberator resource to a route. For example,
+          if you use Compojure as your routing library, you would connect things like this :-
+
+          <pre><code>(<span class="clojure symbol">ns</span> com.acme
   (<span class="clojure symbol">require</span> 
     [compojure.core <span class="clojure keyword">:as</span> compojure]
     [liberator.core <span class="clojure keyword">:as</span> liberator]))
 
 (<span class="clojure symbol">compojure/ANY</span> <span class="clojure string">"/products/:sku"</span> [sku]
-  (<span class="clojure symbol">liberator/resource</span> &#9312;)</code></pre>
+(<span class="clojure symbol">liberator/resource</span> &#9312;)</code></pre>
 
-        <dl class="callouts">
-          <dt>&#9312;
-            <dd>The Liberator <code>resource</code> function takes an
-              even number of arguments, each pair is a keyword
-              (indicating the argument name) and the argument
-              value. There are over 50 different arguments you can give
-              to this function, all of which will be explained
-              later.
-        </dl>
+          <dl class="callouts">
+            <dt>&#9312;
+              <dd>The Liberator <code>resource</code> function takes an
+                even number of arguments, each pair is a keyword
+                (indicating the argument name) and the argument
+                value. There are over 50 different arguments you can give
+                to this function, all of which will be explained
+                later.
+          </dl>
 
-      <p>Now if we sent a web request to the server with the path <code>/products/54354</code> it would be routed to our Liberator resource.
+        <p>Now if we sent a web request to the server with the path <code>/products/54354</code> it would be routed to our Liberator resource.
 
-      <p>This is how it all fits together :-
+        <p>This is how it all fits together :-
 
-        <figure>
-        <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="180">
-          <defs>
-            <style type="text/css">
-              <![CDATA[
+          <figure>
+            <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="180">
+              <defs>
+                <style type="text/css">
+                  <![CDATA[
       text {
         font-size: 9pt;
         font-family: Molengo,Arial;
       }
     ]]>
-            </style>
-            <marker id="arrowhead"
-                    viewBox="0 0 10 10" refX="5" refY="5" 
-                    markerUnits="strokeWidth"
-                    markerWidth="4" markerHeight="3" fill="darkred"
-                    stroke="black"
-                    orient="auto">
-              <path d="M 0 0 L 10 5 L 0 10 z" />
-            </marker>
-            <linearGradient id="clojure">
-              <stop offset="5%" stop-color="#4E8" />
-              <stop offset="95%" stop-color="#4EC" />
-            </linearGradient>
-            <linearGradient id="liberator">
-              <stop offset="5%" stop-color="#F4F" />
-              <stop offset="95%" stop-color="#F8F" />
-            </linearGradient>
-          </defs>
+                </style>
+                <marker id="arrowhead"
+                        viewBox="0 0 10 10" refX="5" refY="5" 
+                        markerUnits="strokeWidth"
+                        markerWidth="4" markerHeight="3" fill="darkred"
+                        stroke="black"
+                        orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" />
+                </marker>
+                <linearGradient id="clojure">
+                  <stop offset="5%" stop-color="#0f0" />
+                  <stop offset="95%" stop-color="#0f0" />
+                </linearGradient>
+                <linearGradient id="liberator">
+                  <stop offset="5%" stop-color="#FA0" />
+                  <stop offset="95%" stop-color="#FA0" />
+                </linearGradient>
+              </defs>
 
-          <g transform="translate(30,20)">
-            <rect x="0" y="0" width="120" height="140" fill="grey" opacity="0.5" stroke="black" stroke-width="2"/>
-            <text x="60" y="60" text-anchor="middle" dominant-baseline="central">Browser or other</text>
-            <text x="60" y="80" text-anchor="middle" dominant-baseline="central">HTTP user-agent</text>
-          </g>
+              <g transform="translate(30,20)">
+                <rect x="0" y="0" width="120" height="140" fill="grey" opacity="0.5" stroke="black" stroke-width="2"/>
+                <text x="60" y="60" text-anchor="middle" dominant-baseline="central">Browser or other</text>
+                <text x="60" y="80" text-anchor="middle" dominant-baseline="central">HTTP user-agent</text>
+              </g>
 
-          <g transform="translate(275,20)">
-            <rect x="0" y="0" width="100" height="140" fill="red" opacity="0.5" stroke="black" stroke-width="2"/>
-            <text x="50" y="50" text-anchor="middle" dominant-baseline="central">Java-based</text>
-            <text x="50" y="70" text-anchor="middle" dominant-baseline="central">web server</text>
-            <text x="50" y="90" text-anchor="middle" dominant-baseline="central">(eg. Jetty)</text>
-          </g>
+              <g transform="translate(275,20)">
+                <rect x="0" y="0" width="100" height="140" fill="#0f0" opacity="0.5" stroke="black" stroke-width="2"/>
+                <text x="50" y="50" text-anchor="middle" dominant-baseline="central">Java-based</text>
+                <text x="50" y="70" text-anchor="middle" dominant-baseline="central">web server</text>
+                <text x="50" y="90" text-anchor="middle" dominant-baseline="central">(eg. Jetty)</text>
+              </g>
 
-          <a xlink:href="http://google.com?q=clojure+ring">
-            <g transform="translate(375,160) rotate(-90)">
-              <rect x="0" y="0" width="140" height="30" fill="url(#clojure)" opacity="0.5" stroke="black" stroke-width="2"/>
-              <text x="70" y="15" text-decoration="underline" text-anchor="middle" dominant-baseline="central" fill="blue">Ring interface</text>
-            </g>
-          </a>
+              <a xlink:href="http://google.com?q=clojure+ring">
+                <g transform="translate(375,160) rotate(-90)">
+                  <rect x="0" y="0" width="140" height="30" fill="url(#clojure)" opacity="0.5" stroke="black" stroke-width="2"/>
+                  <text x="70" y="15" text-decoration="underline" text-anchor="middle" dominant-baseline="central" fill="blue">Ring interface</text>
+                </g>
+              </a>
 
-          <g transform="translate(405,160) rotate(-90)">
-            <rect x="0" y="0" width="140" height="40" fill="url(#clojure)" opacity="0.5" stroke="black" stroke-width="2"/>
-            <text x="70" y="12" text-anchor="middle" dominant-baseline="central">Ring-middleware</text>
-            <text x="70" y="28" text-anchor="middle" dominant-baseline="central">and routing</text>
-          </g>
+              <g transform="translate(405,160) rotate(-90)">
+                <rect x="0" y="0" width="140" height="40" fill="url(#clojure)" opacity="0.5" stroke="black" stroke-width="2"/>
+                <text x="70" y="12" text-anchor="middle" dominant-baseline="central">Ring-middleware</text>
+                <text x="70" y="28" text-anchor="middle" dominant-baseline="central">and routing</text>
+              </g>
 
-          <g transform="translate(450,160) rotate(-90)">
-            <!--          <rect x="0" y="0" width="140" height="55" fill="green" opacity="0.2" stroke="black" stroke-width="2"/> -->
-            <path d="M0,50 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v-55 h-140 z" stroke-width="2" stroke="black" fill="url(#liberator)" opacity="0.5"/>
-            <text x="70" y="20"><tspan text-anchor="middle"  dominant-baseline="central" font-size="12pt" font-weight="bold">Liberator</tspan></text>
-          </g>
+              <g transform="translate(450,160) rotate(-90)">
+                <!--          <rect x="0" y="0" width="140" height="55" fill="green" opacity="0.2" stroke="black" stroke-width="2"/> -->
+                <path d="M0,50 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v-55 h-140 z" stroke-width="2" stroke="black" fill="url(#liberator)" opacity="0.5"/>
+                <text x="70" y="20"><tspan text-anchor="middle" dominant-baseline="central" font-size="12pt" font-weight="bold">Liberator</tspan></text>
+              </g>
 
-          <g transform="translate(515,160) rotate(-90)">
-            <!--          <rect x="0" y="0" width="140" height="40" fill="green" opacity="0.2" stroke="black" stroke-width="2"/>-->
-            <path d="M0,65 v-80 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v80z" stroke-width="2" stroke="black" fill="url(#clojure)" opacity="0.5"/>
-            <text x="70" y="20"><tspan text-anchor="middle"  dominant-baseline="central" font-size="12pt" font-weight="bold" fill="green">Your code</tspan></text>
-          </g>
+              <g transform="translate(515,160) rotate(-90)">
+                <!--          <rect x="0" y="0" width="140" height="40" fill="green" opacity="0.2" stroke="black" stroke-width="2"/>-->
+                <path d="M0,65 v-80 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v10 h20 v-10 h20 v80z" stroke-width="2" stroke="black" fill="url(#clojure)" opacity="0.5"/>
+                <text x="70" y="10"><tspan text-anchor="middle"  dominant-baseline="central" font-size="12pt" font-weight="bold" fill="green">Your</tspan></text>
+                <text x="70" y="30"><tspan text-anchor="middle"  dominant-baseline="central" font-size="12pt" font-weight="bold" fill="green">Clojure code</tspan></text>
+              </g>
 
-          <path id="request-response" d="M150,30 h400 a 60,20 270 0,1 0,120 h-390" stroke="darkred" opacity="0.5" stroke-width="5px" fill="none" marker-end="url(#arrowhead)"/>
+              <path id="request-response" d="M150,30 h400 a 60,20 270 0,1 0,120 h-390" stroke="darkred" opacity="0.5" stroke-width="5px" fill="none" marker-end="url(#arrowhead)"/>
 
-          <circle cx="0" cy="0" r="4" fill="white">
-            <desc>This is the 'pulse' that follows the request-response path to indicate the order that events happen. Not that useful but makes things a bit more obvious.</desc>
-            <animateMotion dur="2s" repeatCount="2" rotate="auto">
-              <mpath xlink:href="#request-response"/>
-            </animateMotion>
-          </circle>
+              <circle cx="0" cy="0" r="4" fill="white">
+                <desc>This is the 'pulse' that follows the request-response path to indicate the order that events happen. Not that useful but makes things a bit more obvious.</desc>
+                <animateMotion dur="2s" repeatCount="2" rotate="auto">
+                  <mpath xlink:href="#request-response"/>
+                </animateMotion>
+              </circle>
 
-        </svg>
-        </figure>
+            </svg>
+          </figure>
 
-      <p>(If you need more information about adding the web server component, see the Ring documentation <a href="#">here</a>).
+        <p>(If you need more information about adding the web server component, see the Ring documentation <a href="#">here</a>).
 
-    </section>
 
-    <aside>
-      <h2>Why Clojure?</h2>
-      <p>
-        In the REST architectural style, data is organized into a set of
-        resources. The state of a particular resource can be communicated over the web in some representation of
-        that state. 
-      <p>Clojure is an ideal implementation language for this architecture.
-        <ol>
-          <li>State in Clojure is contained in data structures such as
-            maps, sets and lists. Functions to represent those data
-            structures in formats such as JSON already exist. Compare this
-            with object-oriented languages such as Java where state is
-            encapsulated within custom objects and where the external
-            representation of this state is not something that is always
-            considered up-front.
-          <li>
-            Clojure's data structures employ structural sharing which
-            enables efficient software transaction memory (STM). This
-            means that state can be modified by one thread, while being in
-            the process of being represented by another, without resorting
-            to locks.
-        </ol>
-    </aside>
+      </section>
 
-    <section>
-      <h2>How it works</h2>
+      <section>
+        <h2>How it works</h2>
 
-      <p>Liberator works by using a <b>decision tree</b> to determine how to
-        properly handle the request.
+        <p>Liberator works by using a <b>decision tree</b> to determine how to
+          properly handle the request.
 
-      <p>Every decision is made by a <dfn>decision function</dfn>. The
-        diagram below illustrates how the outcomes of decision functions
-        determine the response status and the <dfn>handler function</dfn>
-        that will produce the response.
+        <p>Every decision is made by a <dfn>decision function</dfn>. The
+          diagram below illustrates how the outcomes of decision functions
+          determine the response status and the <dfn>handler function</dfn>
+          that will produce the response.
 
-        <figure>
-        <svg id="flow-diagram" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="330">
-          <defs>
-            <style type="text/css">
-              <![CDATA[
+          <figure>
+            <svg id="flow-diagram" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" width="600" height="330">
+              <defs>
+                <style type="text/css">
+                  <![CDATA[
       text {
         font-size: 9pt;
         font-family: Molengo,Arial;
       }
     ]]>
-            </style>
-            <g id="handler">
-              <rect y="-15" width="180" height="30" stroke="black" stroke-width="1px" fill="#acccff"/>
-              <path d="M 10,-15 l 0,30 M 170,-15 l 0,30" stroke="black"/>
-            </g>
+                </style>
+                <g id="handler">
+                  <rect y="-15" width="180" height="30" stroke="black" stroke-width="1px" fill="#acccff"/>
+                  <path d="M 10,-15 l 0,30 M 170,-15 l 0,30" stroke="black"/>
+                </g>
 
-            <g id="decision">
-              
-            </g>
+                <g id="decision">
+                  
+                </g>
 
-            <g id="entry">
-              <rect x="0" y="0" width="240" height="20" stroke="#c0c0c0" stroke-width="1" fill="none"/>
-              <path d="M70,0 v20" stroke="#c0c0c0" stroke-width="1"/>
-            </g>
+                <g id="entry">
+                  <rect x="0" y="0" width="240" height="20" stroke="#c0c0c0" stroke-width="1" fill="none"/>
+                  <path d="M70,0 v20" stroke="#c0c0c0" stroke-width="1"/>
+                </g>
 
-            <marker id="darkorange-marker"
-                    viewBox="0 0 10 10" refX="5" refY="5" 
-                    markerUnits="strokeWidth"
-                    markerWidth="4" markerHeight="3" fill="darkorange"
-                    orient="auto">
-              <path d="M 0 0 L 10 5 L 0 10 z" />
-            </marker>
+                <marker id="darkorange-marker"
+                        viewBox="0 0 10 10" refX="5" refY="5" 
+                        markerUnits="strokeWidth"
+                        markerWidth="4" markerHeight="3" fill="darkorange"
+                        orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" />
+                </marker>
 
-            <marker id="darkblue-marker"
-                    viewBox="0 0 10 10" refX="5" refY="5" 
-                    markerUnits="strokeWidth"
-                    markerWidth="4" markerHeight="3" fill="purple"
-                    orient="auto">
-              <path d="M 0 0 L 10 5 L 0 10 z" />
-            </marker>
-            <marker id="darkgreen-marker"
-                    viewBox="0 0 10 10" refX="5" refY="5" 
-                    markerUnits="strokeWidth"
-                    markerWidth="4" markerHeight="3" fill="darkgreen"
-                    orient="auto">
-              <path d="M 0 0 L 10 5 L 0 10 z" />
-            </marker>
-            <marker id="grey-marker"
-                    viewBox="0 0 10 10" refX="5" refY="5" 
-                    markerUnits="strokeWidth"
-                    markerWidth="4" markerHeight="3" fill="grey"
-                    orient="auto">
-              <path d="M 0 0 L 10 5 L 0 10 z" />
-            </marker>
+                <marker id="darkblue-marker"
+                        viewBox="0 0 10 10" refX="5" refY="5" 
+                        markerUnits="strokeWidth"
+                        markerWidth="4" markerHeight="3" fill="purple"
+                        orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" />
+                </marker>
+                <marker id="darkgreen-marker"
+                        viewBox="0 0 10 10" refX="5" refY="5" 
+                        markerUnits="strokeWidth"
+                        markerWidth="4" markerHeight="3" fill="darkgreen"
+                        orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" />
+                </marker>
+                <marker id="grey-marker"
+                        viewBox="0 0 10 10" refX="5" refY="5" 
+                        markerUnits="strokeWidth"
+                        markerWidth="4" markerHeight="3" fill="grey"
+                        orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" />
+                </marker>
 
-          </defs>
+              </defs>
 
-          <g transform="translate(135,55)">
+              <g transform="translate(135,55)">
 
-            <path d="M 0,-50 v 25" stroke-width="3px" stroke="purple" marker-end="url(#darkblue-marker)"/>
+                <path d="M 0,-50 v 25" stroke-width="3px" stroke="purple" marker-end="url(#darkblue-marker)"/>
 
-            <text x="-15" y="-40">
-              <tspan text-anchor="end" dominant-baseline="central" 
-                     font-style="normal">START</tspan>
-            </text>
+                <text x="-15" y="-40">
+                  <tspan text-anchor="end" dominant-baseline="central" 
+                         font-style="normal">START</tspan>
+                </text>
 
-            <g transform="translate(0,0)">
-              <text x="-25" y="0">
-                <tspan text-anchor="end" dominant-baseline="central" 
-                       font-style="normal">:service-available?</tspan>
-              </text>
-              <text x="-25" y="15" visibility="hidden">
-                <tspan text-anchor="end" dominant-baseline="central" 
-                       font-style="normal">TRUE</tspan>
-                
-                <set id="anim5" attributeName="visibility" to="visible" begin="0.2s" dur="indefinite"/>
-              </text>
+                <g transform="translate(0,0)">
+                  <text x="-25" y="0">
+                    <tspan text-anchor="end" dominant-baseline="central" 
+                           font-style="normal">:service-available?</tspan>
+                  </text>
+                  <text x="-25" y="15" visibility="hidden">
+                    <tspan text-anchor="end" dominant-baseline="central" 
+                           font-style="normal">TRUE</tspan>
+                    
+                    <set id="anim5" attributeName="visibility" to="visible" begin="0.2s" dur="indefinite"/>
+                  </text>
 
-              <g transform="rotate(45)">
-                <path d="M 0,-20 l 20,20 -20,20 -20,-20 Z" stroke-width="2px" stroke="black" fill="none"/>
-                <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
-                <animateTransform id="anim1" attributeName="transform" 
-                                  attributeType="XML"
-                                  type="rotate" from="45" to="90"
-                                  begin="0s" dur="0.4s" fill="freeze" />
-              </g>
+                  <g transform="rotate(45)">
+                    <path d="M 0,-20 l 20,20 -20,20 -20,-20 Z" stroke-width="2px" stroke="black" fill="none"/>
+                    <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
+                    <animateTransform id="anim1" attributeName="transform" 
+                                      attributeType="XML"
+                                      type="rotate" from="45" to="90"
+                                      begin="0s" dur="0.4s" fill="freeze" />
+                  </g>
 
-              <g transform="translate(40,0)">
-                <text x="5" y="0"><tspan text-anchor="start" dominant-baseline="middle" font-style="normal">:handle-service-not-available</tspan></text>
+                  <g transform="translate(40,0)">
+                    <text x="5" y="0"><tspan text-anchor="start" dominant-baseline="middle" font-style="normal">:handle-service-not-available</tspan></text>
 
-                <g transform="translate(175,-20)">
-                  <use x="0" y="0" xlink:href="#entry"/>
-                  <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
-                  <text x="75" y="10" dominant-baseline="central">503</text>
-                  <use x="0" y="20" xlink:href="#entry"/>
-                  <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
-                  <text x="75" y="30" dominant-baseline="central">"Service unavailable."</text>
+                    <g transform="translate(175,-20)">
+                      <use x="0" y="0" xlink:href="#entry"/>
+                      <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
+                      <text x="75" y="10" dominant-baseline="central">503</text>
+                      <use x="0" y="20" xlink:href="#entry"/>
+                      <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
+                      <text x="75" y="30" dominant-baseline="central">"Service unavailable."</text>
+                    </g>
+                  </g>
+                </g>
+
+                <g transform="translate(0,60)">
+
+                  <text x="-25" y="0"><tspan text-anchor="end" font-style="normal" dominant-baseline="central">:authorized?</tspan></text>
+
+                  <text x="-25" y="15" visibility="hidden">
+                    <tspan text-anchor="end" dominant-baseline="central" 
+                           font-style="normal">TRUE</tspan>
+                    <set id="anim6" attributeName="visibility" to="visible" begin="0.4s" dur="indefinite"/>
+                  </text>
+
+
+                  <g transform="rotate(45)">
+                    <path d="M 0,-20 l 20,20 -20,20 -20,-20 Z" stroke-width="2px" stroke="black" fill="none"/>
+                    <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
+                    <animateTransform id="anim2"
+                                      attributeName="transform" 
+                                      attributeType="XML"
+                                      type="rotate" from="45" to="90"
+                                      begin="0.15s" dur="0.4s" fill="freeze" />
+                  </g>
+
+                  <g transform="translate(40,0)">
+                    <text x="5" y="0"><tspan font-style="normal" dominant-baseline="middle" text-anchor="start">:handle-unauthorized</tspan></text>
+
+                    <g transform="translate(135,-20)">
+                      <use x="0" y="0" xlink:href="#entry"/>
+                      <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
+                      <text x="75" y="10" dominant-baseline="central">401</text>
+                      <use x="0" y="20" xlink:href="#entry"/>
+                      <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
+                      <text x="75" y="30" dominant-baseline="central">"Not authorized."</text>
+                    </g>
+                  </g>
+
+                </g>
+
+                <g transform="translate(0,120)">
+
+                  <text x="-25" y="0" text-anchor="end" font-style="normal" dominant-baseline="central">:valid-entity-length?</text>
+                  <text x="-25" y="15" visibility="hidden">
+                    <tspan text-anchor="end" dominant-baseline="central" 
+                           font-style="normal">TRUE</tspan>
+                    <set id="anim7" attributeName="visibility" to="visible" begin="0.6s" dur="indefinite"/>
+                  </text>
+
+
+                  <g transform="rotate(45)">
+                    <path d="M 0,-20 l 20,20 -20,20 -20,-20 Z" stroke-width="2px" stroke="black" fill="none"/>
+                    <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
+                    <animateTransform id="anim3" 
+                                      attributeName="transform" 
+                                      attributeType="XML"
+                                      type="rotate" from="45" to="90"
+                                      begin="0.3s" dur="0.4s" fill="freeze" />
+                  </g>
+
+                  <g transform="translate(40,0)">
+                    <text x="5" y="0"><tspan font-style="normal" dominant-baseline="middle" text-anchor="start">:handle-request-entity-too-large</tspan></text>
+
+                    <g transform="translate(185,-20)">
+                      <use x="0" y="0" xlink:href="#entry"/>
+                      <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
+                      <text x="75" y="10" dominant-baseline="central">413</text>
+                      <use x="0" y="20" xlink:href="#entry"/>
+                      <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
+                      <text x="75" y="30" dominant-baseline="central">"Request Entity Too Large."</text>
+                    </g>
+                  </g>
+                </g>
+
+                <g transform="translate(0,180)">
+
+                  <path d="M 40,0 l30,30 h365 v-60 h-365 z" stroke-width="2px" stroke="purple" fill="none" opacity="0">
+                    <animate attributeType="CSS" attributeName="opacity" 
+                             from="0" to="0.8" begin="0.8s" dur="0.2s" fill="freeze"  />
+                    <desc>Highlighting the successful result</desc>
+                  </path>
+
+                  <text x="-25" y="0"><tspan text-anchor="end" font-style="normal" dominant-baseline="central">:resource-exists?</tspan><tspan>&#9312;</tspan></text>
+                  <text x="-25" y="15" visibility="hidden">
+                    <tspan text-anchor="end" dominant-baseline="central" 
+                           font-style="normal">FALSE</tspan>
+                    <set id="anim8" attributeName="visibility" to="visible" begin="0.8s" dur="indefinite"/>
+                  </text>
+
+                  <g transform="rotate(45)">
+                    <path d="M 0,-20 l 20,20 -20,20 -20,-20 Z" stroke-width="2px" stroke="black" fill="none"/>
+                    <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
+                    <animateTransform  id="anim4"
+                                       attributeName="transform" 
+                                       attributeType="XML"
+                                       type="rotate" from="45" to="0"
+                                       begin="0.45s" dur="0.4s" fill="freeze" />
+                  </g>
+
+                  <g transform="translate(40,0)">
+                    <text x="15" y="0"><tspan font-style="normal" dominant-baseline="middle" text-anchor="start">:handle-not-found</tspan><tspan>&#9313;</tspan></text>
+
+                    <g transform="translate(145,-20)">
+                      <use x="0" y="0" xlink:href="#entry"/>
+                      <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
+                      <text x="75" y="10" dominant-baseline="central">404</text>
+                      <use x="0" y="20" xlink:href="#entry"/>
+                      <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
+                      <text x="75" y="30" dominant-baseline="central">"Not Found."</text>
+                    </g>
+                  </g>
+                </g>
+
+                <g transform="translate(-30,240)">
+                  <text x="5" y="0"><tspan font-style="normal" dominant-baseline="middle" text-anchor="start">:handle-ok</tspan></text>
+
+                  <g transform="translate(75,-20)">
+                    <use x="0" y="0" xlink:href="#entry"/>
+                    <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
+                    <text x="75" y="10" dominant-baseline="central">200</text>
+                    <use x="0" y="20" xlink:href="#entry"/>
+                    <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
+                    <text x="75" y="30" dominant-baseline="central">"OK."</text>
+                  </g>
                 </g>
               </g>
-            </g>
 
-            <g transform="translate(0,60)">
+            </svg>
+          </figure>
 
-              <text x="-25" y="0"><tspan text-anchor="end" font-style="normal" dominant-baseline="central">:authorized?</tspan></text>
-
-              <text x="-25" y="15" visibility="hidden">
-                <tspan text-anchor="end" dominant-baseline="central" 
-                       font-style="normal">TRUE</tspan>
-                <set id="anim6" attributeName="visibility" to="visible" begin="0.4s" dur="indefinite"/>
-              </text>
-
-
-              <g transform="rotate(45)">
-                <path d="M 0,-20 l 20,20 -20,20 -20,-20 Z" stroke-width="2px" stroke="black" fill="none"/>
-                <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
-                <animateTransform id="anim2"
-                                  attributeName="transform" 
-                                  attributeType="XML"
-                                  type="rotate" from="45" to="90"
-                                  begin="0.15s" dur="0.4s" fill="freeze" />
-              </g>
-
-              <g transform="translate(40,0)">
-                <text x="5" y="0"><tspan font-style="normal" dominant-baseline="middle" text-anchor="start">:handle-unauthorized</tspan></text>
-
-                <g transform="translate(135,-20)">
-                  <use x="0" y="0" xlink:href="#entry"/>
-                  <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
-                  <text x="75" y="10" dominant-baseline="central">401</text>
-                  <use x="0" y="20" xlink:href="#entry"/>
-                  <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
-                  <text x="75" y="30" dominant-baseline="central">"Not authorized."</text>
-                </g>
-              </g>
-
-            </g>
-
-            <g transform="translate(0,120)">
-
-              <text x="-25" y="0" text-anchor="end" font-style="normal" dominant-baseline="central">:valid-entity-length?</text>
-              <text x="-25" y="15" visibility="hidden">
-                <tspan text-anchor="end" dominant-baseline="central" 
-                       font-style="normal">TRUE</tspan>
-                <set id="anim7" attributeName="visibility" to="visible" begin="0.6s" dur="indefinite"/>
-              </text>
-
-
-              <g transform="rotate(45)">
-                <path d="M 0,-20 l 20,20 -20,20 -20,-20 Z" stroke-width="2px" stroke="black" fill="none"/>
-                <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
-                <animateTransform id="anim3" 
-                                  attributeName="transform" 
-                                  attributeType="XML"
-                                  type="rotate" from="45" to="90"
-                                  begin="0.3s" dur="0.4s" fill="freeze" />
-              </g>
-
-              <g transform="translate(40,0)">
-                <text x="5" y="0"><tspan font-style="normal" dominant-baseline="middle" text-anchor="start">:handle-request-entity-too-large</tspan></text>
-
-                <g transform="translate(185,-20)">
-                  <use x="0" y="0" xlink:href="#entry"/>
-                  <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
-                  <text x="75" y="10" dominant-baseline="central">413</text>
-                  <use x="0" y="20" xlink:href="#entry"/>
-                  <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
-                  <text x="75" y="30" dominant-baseline="central">"Request Entity Too Large."</text>
-                </g>
-              </g>
-            </g>
-
-            <g transform="translate(0,180)">
-
-              <path d="M 40,0 l30,30 h365 v-60 h-365 z" stroke-width="2px" stroke="purple" fill="none" opacity="0">
-                <animate attributeType="CSS" attributeName="opacity" 
-                         from="0" to="0.8" begin="0.8s" dur="0.2s" fill="freeze"  />
-                <desc>Highlighting the successful result</desc>
-              </path>
-
-              <text x="-25" y="0"><tspan text-anchor="end" font-style="normal" dominant-baseline="central">:resource-exists?</tspan><tspan>&#9312;</tspan></text>
-              <text x="-25" y="15" visibility="hidden">
-                <tspan text-anchor="end" dominant-baseline="central" 
-                       font-style="normal">FALSE</tspan>
-                <set id="anim8" attributeName="visibility" to="visible" begin="0.8s" dur="indefinite"/>
-              </text>
-
-              <g transform="rotate(45)">
-                <path d="M 0,-20 l 20,20 -20,20 -20,-20 Z" stroke-width="2px" stroke="black" fill="none"/>
-                <path d="M 20,0 h 15" stroke-width="3px" stroke="grey" marker-end="url(#grey-marker)"/>
-                <animateTransform  id="anim4"
-                   attributeName="transform" 
-                   attributeType="XML"
-                   type="rotate" from="45" to="0"
-                   begin="0.45s" dur="0.4s" fill="freeze" />
-              </g>
-
-              <g transform="translate(40,0)">
-                <text x="15" y="0"><tspan font-style="normal" dominant-baseline="middle" text-anchor="start">:handle-not-found</tspan><tspan>&#9313;</tspan></text>
-
-                <g transform="translate(145,-20)">
-                  <use x="0" y="0" xlink:href="#entry"/>
-                  <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
-                  <text x="75" y="10" dominant-baseline="central">404</text>
-                  <use x="0" y="20" xlink:href="#entry"/>
-                  <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
-                  <text x="75" y="30" dominant-baseline="central">"Not Found."</text>
-                </g>
-              </g>
-            </g>
-
-            <g transform="translate(-30,240)">
-              <text x="5" y="0"><tspan font-style="normal" dominant-baseline="middle" text-anchor="start">:handle-ok</tspan></text>
-
-              <g transform="translate(75,-20)">
-                <use x="0" y="0" xlink:href="#entry"/>
-                <text x="5" y="10" dominant-baseline="central" font-style="normal">:status</text>
-                <text x="75" y="10" dominant-baseline="central">200</text>
-                <use x="0" y="20" xlink:href="#entry"/>
-                <text x="5" y="30" dominant-baseline="central" font-style="normal">:message</text>
-                <text x="75" y="30" dominant-baseline="central">"OK."</text>
-              </g>
-            </g>
-          </g>
-
-        </svg>
-        </figure>
-
-        <script>
-          pressdo = function() {
+          <script>
+            pressdo = function() {
             document.getElementById("anim1").beginElement();
             document.getElementById("anim2").beginElement();
             document.getElementById("anim3").beginElement();
             document.getElementById("anim4").beginElement();
-          }
-        </script>
-        
+            }
+          </script>
+          
         <p style="text-align: right" >
-        <button onclick="pressdo()">Show animation</button>
+          <button onclick="pressdo()">Play animation</button>
         </p>
 
         <dl class=callouts>
           <dt>&#9312;
             <dd>This is a <em>decision function</em>.
-              <dt>&#9313;
-                <dd>This is a <em>handler function</em>.
+          <dt>&#9313;
+            <dd>This is a <em>handler function</em>.
         </dl>
 
-      <p>As a developer you can specify <b>replacements</b> to both these types of function.
+        <p>As a developer you can specify <b>replacements</b> to both these types of function.
 
-      <p>For example, suppose we want to override the default 404
-        message. We can provide a replacement to
-        the <em>:handle-not-found</em> handler function when we define the
-        resource, like this:
+        <p>For example, suppose we want to override the default 404
+          message. We can provide a replacement to
+          the <em>:handle-not-found</em> handler function when we define the
+          resource, like this:
 
-        <pre><code>(<span class="clojure symbol">compojure/ANY</span> <span class="clojure string">"/products/:sku"</span> [sku]
+          <pre><code>(<span class="clojure symbol">compojure/ANY</span> <span class="clojure string">"/products/:sku"</span> [sku]
   (<span class="clojure symbol">liberator/resource</span>
     <span class="clojure keyword">:handle-not-found</span> (<span class="clojure symbol">fn</span>&#9312; [ctx&#9313;]
                         (<span class="clojure symbol">str</span> <span class="clojure string">"No such product: "</span> sku)&#9314;))</code></pre>
 
-        <dl class=callouts>
-          <dt>&#9312;
-            <dd>We are providing a replacement function, but we could just as easily specify a constant or string value in this case. Constant values can be used in place of functions where appropriate.
-              <dt>&#9313;
-                <dd>This is the Liberator <em>context argument</em>. We'll come to this shortly.
-                  <dt>&#9314;
-                    <dd>We returned only a string here. Liberator is smart enough to turn this into a proper Ring response. This is a useful feature of Liberator, that it will coerce whatever you return into a correct Ring response, using whatever information it has already established (via content negotiation, etc.)
-        </dl>
+          <dl class=callouts>
+            <dt>&#9312;
+              <dd>We are providing a replacement function, but we could just as easily specify a constant or string value in this case. Constant values can be used in place of functions where appropriate.
+                <dt>&#9313;
+                  <dd>This is the Liberator <em>context argument</em>. We'll come to this shortly.
+                    <dt>&#9314;
+                      <dd>We returned only a string here. Liberator is smart enough to turn this into a proper Ring response. This is a useful feature of Liberator, that it will coerce whatever you return into a correct Ring response, using whatever information it has already established (via content negotiation, etc.)
+          </dl>
 
-      <p>So the value which will be returned from the resource will be something like this :-
+        <p>So the value which will be returned from the resource will be something like this :-
 
-        <pre><code>{:status 404
+          <pre><code>{:status 404
  :body "No such product: 12345"}</code></pre>
 
-      <p>This will be processed by Ring to generate the final HTTP response.
+        <p>This will be processed by Ring to generate the final HTTP response.
 
-      <p>But shouldn't the body be valid HTML? This question assumes
-        that the user-agent (the software that sent us the request) is capable
-        of displaying HTML but we don't yet know that.
+        <p>But shouldn't the body be valid HTML? This question assumes
+          that the user-agent (the software that sent us the request) is capable
+          of displaying HTML but we don't yet know that.
 
-      <p>Before we change the response body to valid HTML, let's
-        indicate to the user-agent that we are prepared to do so. We do
-        this via the <i>:available-media-types</i> argument.
+        <p>Before we change the response body to valid HTML, let's
+          indicate to the user-agent that we are prepared to do so. We do
+          this via the <i>:available-media-types</i> argument.
 
-        <pre><code>(<span class="clojure symbol">compojure/ANY</span> <span class="clojure string">"/products/:sku"</span> [sku]
+          <pre><code>(<span class="clojure symbol">compojure/ANY</span> <span class="clojure string">"/products/:sku"</span> [sku]
   (<span class="clojure symbol">liberator/resource</span>
-    <span class="clojure keyword">:handle-not-found</span> (<span class="clojure symbol">fn</span> [ctx] 
-                        (<span class="clojure symbol">str</span> <span class="clojure string">"No such product: "</span> sku)))
+    <span class="clojure keyword">:handle-not-found</span> (<span class="clojure symbol">fn</span> [ctx] (<span class="clojure symbol">str</span> <span class="clojure string">"No such product: "</span> sku)))
     <span class="code highlight"><span class="clojure keyword">:available-media-types</span> [<span class="clojure string">"text/html"</span> <span class="clojure string">"text/plain;q=0.8"</span>]</span>&#9312;)</code></pre>
 
-        <dl class=callouts>
-          <dt>&#9312;
-            <dd>This vector contains the mime-types of the
-              <em>representations</em> that we are able to support, HTML
-              (<code>text/html</code>) and plain-text
-              (<code>text/plain</code>). Each mime-type can be given an
-              optional <em>q-value</em> which indicates which
-              representation the resource would <i>prefer</i> to
-              generate. Note that the user-agent's preferred
-              representation (indicated by the Accept header) always
-              takes priority over this preference. The highest <em>q-value</em> wins and a
-              missing <em>q-value</em> implies a value of 1.
-        </dl>
+          <dl class=callouts>
+            <dt>&#9312;
+              <dd>This vector contains the mime-types of the
+                <em>representations</em> that we are able to support, HTML
+                (<code>text/html</code>) and plain-text
+                (<code>text/plain</code>). Each mime-type can be given an
+                optional <em>q-value</em> which indicates which
+                representation the resource would <i>prefer</i> to
+                generate. Note that the user-agent's preferred
+                representation (indicated by the Accept header) always
+                takes priority over this preference. The highest <em>q-value</em> wins and a
+                missing <em>q-value</em> implies a value of 1.
+          </dl>
+          
+      </section>
+
+      <section>
+        <h2>Understanding the flowchart</h2>
+
+        <p>Decisions are made according to a flowchart which determines
+          the order in which decisions and places where the path splits into
+          two.
+
+        <p>The flowchart always ends at a handler (at the bottom of the
+          chart) which determines the HTTP status code in the response.
+
+        <p>On deciding how to implemented the behaviour you have designed
+          for your resource you will often have this diagram in front of you
+          to decide which functions to replace.
+
+        <p>
+          <figure>
+            <figcaption>The Liberator flowchart (if you don't see anything below, please <a href="http://philipp.meier.name/t/liberator-flow-color.svg" target="_blank">open</a> it)</figcaption>
+            <a href="http://philipp.meier.name/t/liberator-flow-color.svg" target="_blank">
+              <object width="80%" height="80%" data="http://philipp.meier.name/t/liberator-flow-color.svg"></object>
+            </a>
+          </figure>
+        </p>
         
-    </section>
+        <p><small>Our diagrams are in SVG format. If your browser cannot
+            display SVG, there is also
+            a <a href="http://philipp.meier.name/t/liberator-flow-color.png">PNG</a>
+            version of this flowchart available.</small></p>
 
-    <section>
-      <h2>Understanding the flowchart</h2>
+        <p><small>Attribution: This diagram aligns with
+            the <a href="http://wiki.basho.com/Webmachine-Diagram.html">one
+              created by Alan Dean for webmachine</a>. We have made a few small changes to the naming of decisions (so that they can be represented by Clojure keys) and to include the side-effecting <tt>post!</tt>, <tt>put!</tt> and <tt>delete!</tt> actions.</small>
+      </section>
 
-      <p>Decisions are made according to a flowchart which determines
-      the order in which decisions and places where the path splits into
-      two.
+      <section>
+        <h2>Replacing functions</h2>
 
-      <p>The flowchart always ends at a handler (at the bottom of the
-      chart) which determines the HTTP status code in the response.
+        <h3>The context argument</h3>
 
-      <p>On deciding how to implemented the behaviour you have designed
-      for your resource you will often have this diagram in front of you
-      to decide which functions to replace.
+        <p>The context argument is provided as a single argument to all
+          replacement functions. It is a map of 5 entries.
 
-      <p>
-        <figure>
-          <figcaption>The Liberator flowchart (if you don't see anything below, please <a href="http://philipp.meier.name/t/liberator-flow-color.svg" target="_blank">open</a> it)</figcaption>
-          <a href="http://philipp.meier.name/t/liberator-flow-color.svg" target="_blank">
-            <object width="80%" height="80%" data="http://philipp.meier.name/t/liberator-flow-color.svg"></object>
-          </a>
-        </figure>
-      </p>
-        
-      <p><small>Our diagrams are in SVG format. If your browser cannot
-      display SVG, there is also
-      a <a href="http://philipp.meier.name/t/liberator-flow-color.png">PNG</a>
-      version of this flowchart available.</small></p>
+          <table id=context-arg dir=ltr border=1>
+            <style>
+              #context-arg tr td:first-child { text-align: left; padding-top: 5pt; font-weight: normal }
+              #context-arg td ul { list-style-type: none }
+              #context-arg td { padding-left: 10pt }
+            </style>
+            <colgroup width=30% />
+            <colgroup width=1* style="background:#ddd;" />
+            <tbody>
+              <tr>
+                <td>:status
+                <td>The response status code
+              </tr>
+              <tr>
+                <td>:message
+                <td>The default status message that usually accompanies the status code
+              </tr>
+	      <tr>
+                <td>:request
+                <td>The original Ring request
+	      </tr>
+	      <tr>
+                <td>:resource
+                <td>The resource map that defines the Liberator resource
+	      </tr>
+              <tr>
+                <td>:representation
+                <td>This is a map containing the results of content negotiation. It contains 4 sub-keys :-
+                  <ul>
+                    <li>:media-type
+                    <li>:language
+                    <li>:charset
+                    <li>:encoding
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
-      <p><small>Attribution: This diagram aligns with
-      the <a href="http://wiki.basho.com/Webmachine-Diagram.html">one
-      created by Alan Dean for webmachine</a>. We have made a few small changes to the naming of decisions (so that they can be represented by Clojure keys) and to include the side-effecting <tt>post!</tt>, <tt>put!</tt> and <tt>delete!</tt> actions.</small>
-    </section>
+          <h3>The return value</h3>
 
-    <section>
-      <h2>Replacing functions</h2>
+        <p>For decision functions you usually return a boolean. However,
+          sometimes you want to store some state in the context to pass to
+          the next decisions and ultimately to the handler. 
 
-      <h3>The context argument</h3>
+        <p>
+          If you return a map, this will get merged into the context given
+          to future functions. Returning a map implies a true result, so
+          if you want to return a false result but also specify a map you
+          can do this by returning a vector pair containing the map,
+          ie. [false {}]
 
-      <p>The context argument is provided as a single argument to all
-        replacement functions. It is a map of 5 entries.
+        <p>For handler functions you have more flexibility. If you return
+          a map, it will be treated as a Ring response map. Anything else
+          will be treated as the :body value of a Ring reponse map, and the
+          rest of the details will be added by Liberator. It is possible in
+          this way to override the status code if necessary. Only do this if
+          you know what you're doing, but if you're sure Liberator won't
+          stand in your way.
 
-        <table id=context-arg dir=ltr border=1>
-          <style>
-            #context-arg tr td:first-child { text-align: left; padding-top: 5pt; font-weight: normal }
-            #context-arg td ul { list-style-type: none }
-            #context-arg td { padding-left: 10pt }
-          </style>
-          <colgroup width=30% />
-          <colgroup width=1* style="background:#ddd;" />
-          <tbody>
-            <tr>
-              <td>:status
-              <td>The response status code
-            </tr>
-            <tr>
-              <td>:message
-              <td>The default status message that usually accompanies the status code
-            </tr>
-	    <tr>
-              <td>:request
-              <td>The original Ring request
-	    </tr>
-	    <tr>
-              <td>:resource
-              <td>The resource map that defines the Liberator resource
-	    </tr>
-            <tr>
-              <td>:representation
-              <td>This is a map containing the results of content negotiation. It contains 4 sub-keys :-
-                <ul>
-                  <li>:media-type
-                  <li>:language
-                  <li>:charset
-                  <li>:encoding
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+          <h3>Function reference</h3>
 
-        <h3>The return value</h3>
-
-      <p>For decision functions you usually return a boolean. However,
-      sometimes you want to store some state in the context to pass to
-      the next decisions and ultimately to the handler. 
-
-      <p>
-        If you return a map, this will get merged into the context given
-        to future functions. Returning a map implies a true result, so
-        if you want to return a false result but also specify a map you
-        can do this by returning a vector pair containing the map,
-        ie. [false {}]
-
-      <p>For handler functions you have more flexibility. If you return
-        a map, it will be treated as a Ring response map. Anything else
-        will be treated as the :body value of a Ring reponse map, and the
-        rest of the details will be added by Liberator. It is possible in
-        this way to override the status code if necessary. Only do this if
-        you know what you're doing, but if you're sure Liberator won't
-        stand in your way.
-
-        <h3>Function reference</h3>
-
-        <script>
-          toggle_advanced = function(b) {
+          <script>
+            toggle_advanced = function(b) {
             if (b.checked) disp = "none"; else disp = "table-row"; 
             Array.prototype.forEach.call(document.querySelectorAll("#overrides .advanced"), 
-                                         function(e) { e.setAttribute("style", "display: " + disp); });
-          }
-        </script>
+            function(e) { e.setAttribute("style", "display: " + disp); });
+            }
+          </script>
 
-        <input checked name="adv" type="checkbox" onclick="toggle_advanced(this)">Hide advanced functions</button>
+          <input checked name="adv" type="checkbox" onclick="toggle_advanced(this)">Hide advanced functions</input>
 
-        <table id=overrides dir=ltr border=1 >
-          <style>
-            #overrides tr td:first-child { text-align: left; padding-top: 5pt; font-weight: bold; background: black }
-            #overrides tr th { font-family: Oregano, cursive }
-            #overrides td ul { list-style-type: none }
-            #overrides td { padding-left: 10pt }
-            #overrides td.decision { color: orange }
-            #overrides td.handler { color: green }
-            #overrides td.action { color: red }
-            #overrides td.declaration { color: grey }
-            #overrides tr.advanced { display: none }
-          </style>
-          <colgroup width=30% />
-          <colgroup width=20% />
-          <colgroup width=50% />
-          <thead>
-            <tr><th>Key<th>Type<th>Purpose</tr>
-          </thead>
-          <tbody>
-            <tr><td class="decision">:allowed?<td>decision<td>Whether the user is allowed access to the resource. Returning false will cause a 403 Forbidden.</tr>
-            <tr><td class="decision">:authorized?<td>decision<td></tr>
-            <tr><td class="declaration">:available-charsets<td>declaration<td></tr>
-            <tr><td class="declaration">:available-encodings<td>declaration<td></tr>
-            <tr><td class="declaration">:available-languages<td>declaration<td></tr>
-            <tr><td class="declaration">:available-media-types<td>declaration<td></tr>
-            <tr class="advanced"><td class="decision">:can-post-to-missing?<td>decision<td></tr>
-            <tr class="advanced"><td class="decision">:charset-available?<td>decision<td></tr>
-            <tr class="advanced"><td class="decision">:conflict?<td>decision<td></tr>
-            <tr><td class="action">:delete!<td>action<td></tr>
-            <tr class="advanced"><td class="decision">:encoding-available?<td>decision<td></tr>
-            <tr class="advanced"><td class="declaration">:etag<td>declaration<td></tr>
-            <tr class="advanced"><td class="decision">:existed?<td>decision<td></tr>
-            <tr class="advanced"><td class="decision">:exists?<td>decision<td></tr>
-            <t class="advanced"r><td class="handler">:handle-created<td>handler<td></tr>
-            <t class="advanced"r><td class="handler">:handle-gone<td>handler<td></tr>
-            <t class="advanced"r><td class="handler">:handle-malformed<td>handler<td></tr>
-            <t class="advanced"r><td class="handler">:handle-method-not-allowed<td>handler<td></tr>
-            <t class="advanced"r><td class="handler">:handle-multiple-representations<td>handler<td></tr>
-            <t class="advanced"r><td class="handler">:handle-no-content<td>handler<td></tr>
-            <t class="advanced"r><td class="handler">:handle-not-acceptable<td>handler<td></tr>
-            <t class="advanced"r><td class="handler">:handle-not-found<td>handler<td></tr>
-            <t class="advanced"r><td class="handler">:handle-not-implemented<td>handler<td></tr>
-            <t class="advanced"r><td class="handler">:handle-not-modified<td>handler<td></tr>
-            <tr><td class="handler">:handle-ok<td>handler<td></tr>
-            <t class="advanced"r><td class="handler">:handle-precondition-failed<td>handler<td></tr>
-            <t class="advanced"r><td class="handler">:handle-request-entity-too-large<td>handler<td></tr>
-            <t class="advanced"r><td class="handler">:handle-service-not-available<td>handler<td></tr>
-            <tr><td class="handler">:handle-unsupported-media-type<td>handler<td></tr>
-            <t class="advanced"r><td class="handler">:handle-uri-too-long<td>handler<td></tr>
-            <tr class="advanced"><td class="decision">:known-content-type?<td>decision<td></tr>
-            <tr class="advanced"><td class="decision" >:known-method?<td>decision<td></tr>
-            <tr class="advanced"><td class="decision">:language-available?<td>decision<td></tr>
-            <tr class="advanced"><td class="decision">:malformed?<td>decision<td></tr>
-            <tr class="advanced"><td class="decision">:method-allowed?<td>decision<td></tr>
-            <tr class="advanced"><td class="decision">:multiple-representations?<td>decision<td></tr>
-            <tr class="advanced"><td class="decision">:new?<td>decision<td></tr>
-            <tr class="advanced"><td class="action">:post!<td>action<td></tr>
-            <tr class="advanced"><td class="decision">:post-redirect?<td>decision<td></tr>
-            <tr class="advanced"><td class="decision">:post-to-existing?<td>decision<td></tr>
-            <tr><td class="action">:put!<td>action<td></tr>
-            <tr class="advanced"><td class="decision">:put-to-different-url?<td>decision<td></tr>
-            <tr class="advanced"><td class="decision">:respond-with-entity?<td>decision<td></tr>
-            <tr><td class="declaration">:see-other<td>declaration<td></tr>
-            <tr><td class="decision">:service-available?<td>decision<br>(Defaults to true)<td>Return false if, for some reason, you are no longer able to fulfill any requests, perhaps due to capacity issues. (You've just appeared on Hacker News!)</tr>
-            <tr class="advanced"><td class="handler">:unauthorized<td>handler<td></tr>
-            <tr class="advanced"><td class="handler">:unknown-method<td>handler<td></tr>
-            <tr class="advanced"><td class="decision">:uri-too-long?<td>decision<td></tr>
-            <tr class="advanced"><td class="decision">:valid-content-header?<td>decision<td></tr>
-            <tr class="advanced"><td class="decision">:valid-entity-length?<td>decision<td></tr>
-        </table>
+          <table id=overrides dir=ltr border=1 >
+            <style>
+              #overrides tr td:first-child { text-align: left; padding-top: 5pt; font-weight: bold; background: black }
+              #overrides tr th { font-family: Oregano, cursive }
+              #overrides td ul { list-style-type: none }
+              #overrides td { padding-left: 10pt }
+              #overrides td.decision { color: orange }
+              #overrides td.handler { color: green }
+              #overrides td.action { color: red }
+              #overrides td.declaration { color: grey }
+              #overrides tr.advanced { display: none }
+            </style>
+            <colgroup width=30% />
+            <colgroup width=20% />
+            <colgroup width=50% />
+            <thead>
+              <tr><th>Key<th>Type<th>Purpose</tr>
+            </thead>
+            <tbody>
+              <tr><td class="decision">:allowed?<td>decision<td>Whether the user is allowed access to the resource. Returning false will cause a 403 Forbidden.</tr>
+              <tr><td class="decision">:authorized?<td>decision<td></tr>
+              <tr><td class="declaration">:available-charsets<td>declaration<td></tr>
+              <tr><td class="declaration">:available-encodings<td>declaration<td></tr>
+              <tr><td class="declaration">:available-languages<td>declaration<td></tr>
+              <tr><td class="declaration">:available-media-types<td>declaration<td></tr>
+              <tr class="advanced"><td class="decision">:can-post-to-missing?<td>decision<td></tr>
+              <tr class="advanced"><td class="decision">:charset-available?<td>decision<td></tr>
+              <tr class="advanced"><td class="decision">:conflict?<td>decision<td></tr>
+              <tr><td class="action">:delete!<td>action<td></tr>
+              <tr class="advanced"><td class="decision">:encoding-available?<td>decision<td></tr>
+              <tr class="advanced"><td class="declaration">:etag<td>declaration<td></tr>
+              <tr class="advanced"><td class="decision">:existed?<td>decision<td></tr>
+              <tr class="advanced"><td class="decision">:exists?<td>decision<td></tr>
+              <tr class="advanced"><td class="handler">:handle-created<td>handler<td></tr>
+              <tr class="advanced"><td class="handler">:handle-gone<td>handler<td></tr>
+              <tr class="advanced"><td class="handler">:handle-malformed<td>handler<td></tr>
+              <tr class="advanced"><td class="handler">:handle-method-not-allowed<td>handler<td></tr>
+              <tr class="advanced"><td class="handler">:handle-multiple-representations<td>handler<td></tr>
+              <tr class="advanced"><td class="handler">:handle-no-content<td>handler<td></tr>
+              <tr><td class="handler">:handle-not-acceptable<td>handler<td></tr>
+              <tr class="advanced"><td class="handler">:handle-not-found<td>handler<td></tr>
+              <tr class="advanced"><td class="handler">:handle-not-implemented<td>handler<td></tr>
+              <tr class="advanced"><td class="handler">:handle-not-modified<td>handler<td></tr>
+              <tr><td class="handler">:handle-ok<td>handler<td></tr>
+              <tr class="advanced"><td class="handler">:handle-precondition-failed<td>handler<td></tr>
+              <tr class="advanced"><td class="handler">:handle-request-entity-too-large<td>handler<td></tr>
+              <tr class="advanced"><td class="handler">:handle-service-not-available<td>handler<td></tr>
+              <tr><td class="handler">:handle-unsupported-media-type<td>handler<td></tr>
+              <tr class="advanced"><td class="handler">:handle-uri-too-long<td>handler<td></tr>
+              <tr class="advanced"><td class="decision">:known-content-type?<td>decision<td></tr>
+              <tr class="advanced"><td class="decision" >:known-method?<td>decision<td></tr>
+              <tr class="advanced"><td class="decision">:language-available?<td>decision<td></tr>
+              <tr class="advanced"><td class="decision">:malformed?<td>decision<td></tr>
+              <tr class="advanced"><td class="decision">:method-allowed?<td>decision<td></tr>
+              <tr class="advanced"><td class="decision">:multiple-representations?<td>decision<td></tr>
+              <tr class="advanced"><td class="decision">:new?<td>decision<td></tr>
+              <tr><td class="action">:post!<td>action<td></tr>
+              <tr><td class="decision">:post-redirect?<td>decision<td></tr>
+              <tr class="advanced"><td class="decision">:post-to-existing?<td>decision<td></tr>
+              <tr><td class="action">:put!<td>action<td></tr>
+              <tr class="advanced"><td class="decision">:put-to-different-url?<td>decision<td></tr>
+              <tr class="advanced"><td class="decision">:respond-with-entity?<td>decision<td></tr>
+              <tr><td class="declaration">:see-other<td>declaration<td></tr>
+              <tr><td class="decision">:service-available?<td>decision<br>(Defaults to true)<td>Return false if, for some reason, you are no longer able to fulfill any requests, perhaps due to capacity issues. (You've just appeared on Hacker News!)</tr>
+              <tr><td class="handler">:unauthorized<td>handler<td></tr>
+              <tr class="advanced"><td class="handler">:unknown-method<td>handler<td></tr>
+              <tr class="advanced"><td class="decision">:uri-too-long?<td>decision<td></tr>
+              <tr class="advanced"><td class="decision">:valid-content-header?<td>decision<td></tr>
+              <tr class="advanced"><td class="decision">:valid-entity-length?<td>decision<td></tr>
+          </table>
 
-    </section>
+      </section>
 
-    <section id=getting-started>
-      <h2>Getting started</h2>
+      <section id=getting-started>
+        <h2>Getting started</h2>
 
-      <p>For this bit, please use <a href="http://leiningen.org">leiningen 2</a>.</p>
-      
-      <p>Create a new project
+        <p>For this bit, please use <a href="http://leiningen.org">leiningen 2</a>.</p>
+        
+        <p>Create a new project
 
-      <pre>> <kbd>lein new myproj</kbd></pre>
+          <pre>> <kbd>lein new myproj</kbd></pre>
 
-      <p>Edit the <code>project.clj</code> file so that the <code>liberator</code> dependency is added.
+        <p>Edit the <code>project.clj</code> file so that the <code>liberator</code> dependency is added.
 
-      <pre><code>(<span class="clojure symbol">defproject</span> myproj <span class="clojure string">"0.0.1"</span>
-   <span class="clojure keyword">:dependencies</span> [...
-                  [liberator <span class="clojure string">"0.5.0"</span>]]</code></pre>
+          <pre><code>(<span class="clojure symbol">defproject</span> myproj <span class="clojure string">"0.0.1"</span>
+  <span class="clojure keyword">:dependencies</span> [...
+  [liberator <span class="clojure string">"0.5.0"</span>]]</code></pre>
 
-      <p>Start the REPL
+        <p>Start the REPL
 
-      <pre>> <kbd>lein repl</kbd></pre>
+          <pre>> <kbd>lein repl</kbd></pre>
 
-      <p>Import liberator
+        <p>Import liberator
 
-      <pre>REPL> <kbd>(use 'liberator.core)</kbd></pre>
+          <pre>REPL> <kbd>(use 'liberator.core)</kbd></pre>
 
-      <h3>Running the examples</h3>
+          <h3>Running the examples</h3>
 
-      <p>A set of examples is included. If you want to see the examples in a browser, run
+        <p>A set of examples is included. If you want to see the examples in a browser, run
 
-      <pre>> <kbd>lein examples</kbd></pre>
+          <pre>> <kbd>lein examples</kbd></pre>
 
-      <p>This will start a web server on port 8000 (but you can specify a alternative port with an argument, eg. <kbd>lein examples 8001</kbd>). Alternatively you can run the web server with <kbd>lein ring server</kbd>).
+        <p>This will start a web server on port 8000 (but you can specify a alternative port with an argument, eg. <kbd>lein examples 8001</kbd>). Alternatively you can run the web server with <kbd>lein ring server</kbd>).
 
-      <h3>Swank users</h3>
+          <h3>Swank users</h3>
 
-      <p>If you code in Emacs (with Slime) and want to use swank, ensure
-      you have the lein swank plugin installed. For example, ensure you have included the lein-swank plugin in your <tt>$HOME/.lein/profiles.clj</tt> file :- 
+        <p>If you code in Emacs (with Slime) and want to use swank, ensure
+          you have the lein swank plugin installed. For example, ensure you have included the lein-swank plugin in your <tt>$HOME/.lein/profiles.clj</tt> file :- 
 
-      <pre>
+          <pre>
 {<span class="clojure keyword">:user</span> {<span class="clojure keyword">:plugins</span> [[<span class="clojure symbol">lein-swank</span> <span class="clojure string">"1.4.4"</span>]]}}
-      </pre>
+          </pre>
 
-      <p>Now you can use leiningen to start the swank server :-
+        <p>Now you can use leiningen to start the swank server :-
 
-      <pre>> <kbd>lein swank</kbd></pre>
+          <pre>> <kbd>lein swank</kbd></pre>
 
-      <p>In Emacs, execute <tt>M-x slime-connect</tt> and wait for the REPL to start. To start the examples server, type the following commands into the Emacs REPL :-
+        <p>In Emacs, execute <tt>M-x slime-connect</tt> and wait for the REPL to start. To start the examples server, type the following commands into the Emacs REPL :-
 
-      <pre>
+          <pre>
 user> <kbd>(require 'examples.server)</kbd>
-user> <kbd>(examples.server/-main)</kbd>
-      </pre>
-     
-      <p>Now open <tt>examples/clj/examples.clj</tt> and add a new route to the top of the <tt>assemble-routes</tt> function. Re-eval the buffer and test in the browser. Happy hacking!</p>
+user> <kbd>(examples.server/-main)</kbd></pre>
+          
+        <p>Now open <tt>examples/clj/examples.clj</tt> and add a new route to the top of the <tt>assemble-routes</tt> function. Re-eval the buffer and test in the browser. Happy hacking!</p>
 
-<pre>
+        <pre>
 (<span class="clojure symbol">defn</span> assemble-routes []
-  (->
-   (<span class="clojure symbol">routes</span>
-    
-    <span class="code highlight">(<span class="clojure symbol">ANY</span> <span class="clojure string">"/my-example"</span> [] (<span class="clojure symbol">resource</span> <span class="clojure keyword">:handle-ok</span> <span class="clojure string">"My example..."</span>))</span>
+  (<span class="clojure symbol">routes</span>
+    <span class="code highlight">(<span class="clojure symbol">ANY</span> <span class="clojure string">"/my-example"</span> [] (<span class="clojure symbol">resource</span>     <span class="clojure keyword">:handle-ok</span> <span class="clojure string">"My example..."</span>))</span>
     (<span class="clojure symbol">ANY</span> <span class="clojure string">"/hello-world"</span> [] <span class="clojure symbol">hello-world</span>)
     ...
-))
-</pre>
-      
-    </section>
+  ))</pre>
+        
+      </section>
 
-    <section id=development>
-      <h2>How to contribute to Liberator</h2>
+      <section id=nextsteps>
+        <h2>Next steps</h2>
+        <p>You should run the examples and look at the source code in the <tt>examples/</tt> directory to find out how they work.</p>
+      </section>
 
-      <p>First, clone the official repository (or fork it!).
+      <section id=community>
+        <h2>Community</h2>
+        <p>If you get stuck and need some help, or just want to hang-out with others who are hacking with and on Liberator, then please join our <a href="http://groups.google.com/group/clojure-liberator">clojure-liberator</a> Google group.</p>
 
-      <pre>> <kbd>git clone https://github.com/clojure-liberator/liberator.git</kbd></pre>
+      </section>
 
-      <h3>Running the tests</h3>
+      <section id=contribute>
+        <h2>How to contribute to Liberator</h2>
 
-      <p>Liberator uses <a href="https://github.com/marick/Midje/">Midje</a> for testing. You can run all the tests like this :-
+        <p>We would welcome some help with Liberator. Especially with
+          helping to improve this website and provide more
+          documentation. We'd also welcome pull-requests to fix issues,
+          bugs and reach better complaince with the HTTP spec.</p>
 
-      <pre>> <kbd>lein midje</kbd></pre>
+        <p>Here's a guide about how you can start contributing code to the project.</p>
 
-    </section>
+        <p>First, create your own fork of the official repository on GitHub. Clone this on your local machine.
 
-    <section>
-      <a name=faq/>
-      <h2>F.A.Q.</h2>
+          <pre>> <kbd>git clone https://github.com/clojure-liberator/liberator.git</kbd></pre>
+        </p>
 
-      <dl class="faq">
+        <h3>Running the tests</h3>
 
-        <dt>Why isn't Liberator simply a set of Ring middleware?
+        <p>Liberator uses <a href="https://github.com/marick/Midje/">Midje</a> for testing. You can run all the tests like this :-
 
-          <dd>Decision functions in Liberator aren't Ring middleware
-          because they don't return Ring responses. Instead, they return
-          the decision (true or false), plus optionally some extra data
-          to merge with the context. <p>Earlier versions of Liberator
-          strived to create a similar system using just Ring middleware
-          functions. However, this was abandoned for a number of
-          reasons. First, when you need one Ring middleware function to
-          access the data derived by another, <em>order begins to
-          matter</em> and dependencies creep in. Also, a threaded
-          nesting of Ring middleware assumes that the decision flow is
-          linear. The complete decision flow for HTTP is non-linear and
-          splits/branches at various points.</dd>
+          <pre>> <kbd>lein midje</kbd></pre>
 
-        <dt>How does Liberator interact with routing engines such as
-        Compojure?
+      </section>
 
-          <dd>You should use compojure's <tt>ANY</tt> only so Liberator
-            gets to handle every method.</dd>
+      <section id=faq>
+        <a name=faq/>
+        <h2>F.A.Q.</h2>
 
-        <dt>What are the <tt>:post!</tt> <tt>:put!</tt>
-        and <tt>:delete!</tt> supposed to represent? Since they are
-        actions, they cannot return anything.
+        <dl class="faq">
 
-          <dd>These actions should produce intentional
-          side-effects. The <tt>!</tt> suffix is a LISP convention to
-          indicate that system state will change. For example, ou might
-          implement a put! by updating a row in a database. They don't
-          return values, if they did then there would be a mixing of
-          concerns.
+          <dt>Why isn't Liberator simply a set of Ring middleware?
 
-      </dl>
-    </section>
+            <dd>Decision functions in Liberator aren't Ring middleware
+              because they don't return Ring responses. Instead, they return
+              the decision (true or false), plus optionally some extra data
+              to merge with the context. <p>Earlier versions of Liberator
+                strived to create a similar system using just Ring middleware
+                functions. However, this was abandoned for a number of
+                reasons. First, when you need one Ring middleware function to
+                access the data derived by another, <em>order begins to
+                  matter</em> and dependencies creep in. Also, a threaded
+                nesting of Ring middleware assumes that the decision flow is
+                linear. The complete decision flow for HTTP is non-linear and
+                splits/branches at various points.</dd>
+
+          <dt>How does Liberator interact with routing engines such as
+            Compojure?
+
+            <dd>You should use compojure's <tt>ANY</tt> only so Liberator
+              gets to handle every method.</dd>
+
+          <dt>What are the <tt>:post!</tt> <tt>:put!</tt>
+            and <tt>:delete!</tt> supposed to represent? Since they are
+            actions, they cannot return anything.
+
+            <dd>These actions should produce intentional
+              side-effects. The <tt>!</tt> suffix is a LISP convention to
+              indicate that system state will change. For example, ou might
+              implement a put! by updating a row in a database. They don't
+              return values, if they did then there would be a mixing of
+              concerns.
+
+        </dl>
+      </section>
 
 
-    <section>
-      <h2>Credits</h2>
+      <section>
+        <h2>Credits</h2>
 
-      <p>Liberator (formerly known as compojure-rest) was written by
-        Phillipp Meier. Other contributors include <a href="http://blog.malcolmsparks.com">Malcolm Sparks</a> and
-        James Henderson. Thanks to Eric Normand for asking some good
-        questions.
+        <p>Liberator (formerly known as compojure-rest) was written by
+          Phillipp Meier. Other contributors include <a href="http://blog.malcolmsparks.com">Malcolm Sparks</a> and
+          James Henderson. Thanks to Eric Normand for asking some good
+          questions.
+      </section>
 
-    <section>
+    </div>
+
+    <div id=asides>
+      <aside>
+        <h2>Why Clojure?</h2>
+        <p>
+          In the REST architectural style, data is organized into a set of
+          resources. The state of a particular resource can be
+          communicated over the web in some representation of that state.
+
+        <p>Clojure is an ideal implementation language for this
+              architecture. Firstly, state in Clojure is contained in
+              data structures such as maps, sets and lists. Functions to
+              represent those data structures in formats such as JSON
+              already exist. Compare this with object-oriented languages
+              such as Java where state is encapsulated within custom
+              objects and where the external representation of this
+              state is not something that is always considered up-front.
+
+          <p>Secondly, Clojure's data structures employ structural
+              sharing which enables efficient software transaction
+              memory (STM). This means that state can be modified by one
+              thread, while being in the process of being represented by
+              another, without resorting to locks.
+          </ul>
+      </aside>
+
+      <aside>
+        <h2>Liberating data?</h2>
+
+        <p>Forget 'big data', there is so much useful data locked up in
+          'big applications'. Many of these applications, especially in
+          large organisations, are written in Java.
+
+        <p>Clojure can run side-by-side with Java in the JVM, seamlessly
+          accessing the same internal Java APIs that your application
+          does. That makes Clojure a great choice for developing new facades
+          onto your application stack.
+      </aside>
+
+    </div>
 
     <footer>
       Copyright &#169 2012, Philipp Meier. All Rights Reserved.
