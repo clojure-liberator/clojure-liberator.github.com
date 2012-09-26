@@ -1,23 +1,55 @@
 <!DOCTYPE html>
-<!-- HTML5 home page for Liberator -->
-<html>
+<html prefix="dc: http://purl.org/dc/elements/1.1/" lang="en">
   <head>
-    <meta charset=utf-8>
     <title>Liberator</title>
+
+    <meta charset="utf-8">
+    <meta property="dc:creator" content="Malcolm Sparks"/>
+    <meta property="dc:contributor" content="Philipp Meier"/>
+    <meta property="dc:language" content="en"/>
+    <meta property="dc:title" content="Liberator"/>
+    <meta property="dc:description" content="A free, open-source web library for the Clojure programming language with an emphasis on REST"/>
+
     <!-- http://www.google.com/webfonts#UsePlace:use/Collection:Molengo|Anonymous+Pro:400,700|Oregano -->
     <link href='http://fonts.googleapis.com/css?family=Molengo|Anonymous+Pro:400,700|Oregano' rel='stylesheet' type='text/css'>
+
     <style>
       body { 
-      background: #fafafa; 
-      margin-left: 24pt; 
-      margin-top: 24pt; 
+      margin-left: 20px; 
+      margin-top: 12px; 
       color: black; 
       font-family: Molengo,Helvetica,Arial; 
       font-size: 11pt;
+      background: #cfcfcf;
+      background-image: url("zenbg-1.png"), url("zenbg-2.png");
+      background-repeat: repeat-x, repeat;
       }
 
       #title { display: none; }
-      div#logo { float: left; width: 70px; border: 1px solid black; position: absolute }
+
+      div.fixed {
+      position: fixed;
+      }
+
+      div#logo { 
+      float: left; 
+      width: 70px; 
+      border: 1px solid black;
+      }
+
+      nav {
+      clear: left;
+      }
+
+      nav ul {
+      margin: 0; 
+      padding: 20px 0 0 0;
+      }
+
+      nav li {
+      list-style-type: none;
+      }
+
       #introduction p { font-family: Oregano, cursive; font-size: 20pt; margin-top: 3pt; }
 
       h1, h2 { 
@@ -25,9 +57,11 @@
       font-weight: normal;
       text-shadow: 1px 1px 6px #ddd;
       }
+
       h2 { 
       font-size: 20pt 
       }
+
       #introduction p#description { 
       font-size: 160%; 
       margin-top: 6pt; 
@@ -35,18 +69,18 @@
       text-shadow: 1px 1px 6px #ddd;
       }
 
-
-
       #content {
       float: left;
       border-left: 1px solid grey;
       padding-bottom: 40px;
+      box-shadow: -4px 4px 7px #aa8; 
+      margin-left: 100px;
       }
 
       section { 
       width: 620px; 
-      margin-left: 100px; 
-      margin-right: 30pt 
+      margin-left: 12pt; 
+      margin-right: 12pt;
       }
 
       #asides {
@@ -161,9 +195,10 @@
     </script>
 
     <a href="https://github.com/clojure-liberator/liberator">
-      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="forkme_right_green_007200.png" alt="Fork me on GitHub">
     </a>
 
+    <div class=fixed>
     <div id=logo>
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -205,8 +240,21 @@
         </g>
       </svg>
     </div>
+    <nav>
+      <ul>
+        <li><a href="#top">Top</a>
+        <li><a href="#flowchart">Flowchart</a>
+        <li><a href="#functions">Functions</a>
+        <li><a href="#gettingstarted">Get started</a>
+        <li><a href="#community">Community</a>
+        <li><a href="#faq">FAQ</a>
+        <li><a href="http://clojure-liberator.github.com/">Github</a>
+      </ul>
+    </nav>
+    </div>
 
     <div id=content>
+      <a name="top"/>
 
       <section id=introduction>
         <h1 id=title>Liberator</h1>
@@ -361,6 +409,7 @@
       </section>
 
       <section>
+        <a name=works/>
         <h2>How it works</h2>
 
         <p>Liberator works by using a <b>decision tree</b> to determine how to
@@ -676,6 +725,7 @@
       </section>
 
       <section>
+        <a name="flowchart"/>
         <h2>Understanding the flowchart</h2>
 
         <p>Decisions are made according to a flowchart which determines
@@ -709,6 +759,7 @@
       </section>
 
       <section>
+        <a name="functions"/>
         <h2>Replacing functions</h2>
 
         <h3>The context argument</h3>
@@ -862,6 +913,7 @@
       </section>
 
       <section id=getting-started>
+        <a name="gettingstarted"/>
         <h2>Getting started</h2>
 
         <p>For this bit, please use <a href="http://leiningen.org">leiningen 2</a>.</p>
@@ -929,6 +981,7 @@ user> <kbd>(examples.server/-main)</kbd></pre>
       </section>
 
       <section id=community>
+        <a name=community/>
         <h2>Community</h2>
         <p>If you get stuck and need some help, or just want to hang-out with others who are hacking with and on Liberator, then please join our <a href="http://groups.google.com/group/clojure-liberator">clojure-liberator</a> Google group.</p>
 
