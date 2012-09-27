@@ -44,10 +44,15 @@
       border: 1px solid black;
       }
 
+      <!-- 
+           We have a fixed header of 40px, we means that the anchor links need to be offset by the same.
+           http://www.pixelflips.com/blog/anchor-links-with-a-fixed-header/
+        -->
       span.anchor {
       display: block;
       height: 40px;
       margin-top: -40px;
+      display: hidden;
       }
 
       nav {
@@ -315,11 +320,15 @@
     <div id=main>
     <div id=content>
 
+      <!-- We put empty spans before each section to provide anchor targets: 
+           See http://www.pixelflips.com/blog/anchor-links-with-a-fixed-header/ for more details. -->
       <span class="anchor" id="introduction"></span>
       <section>
         <h1 id=title>Liberator</h1>
 
-        <p id=description>Liberator is a free, open-source web library for the Clojure programming language with an emphasis on <abbr title="Representational State Transfer">REST</abbr>. 
+        <p id=description>Liberator is a free, open-source web library
+        for the Clojure programming language with an emphasis
+        on <abbr title="Representational State Transfer">REST</abbr>.
 
       </section>
       
