@@ -14,9 +14,14 @@
     <link href='http://fonts.googleapis.com/css?family=Molengo|Anonymous+Pro:400,700|Oregano' rel='stylesheet' type='text/css'>
 
     <style>
+      html {
+      margin: 0;
+      padding: 0;
+      }
+
       body { 
-      margin-left: 20px; 
-      margin-top: 12px; 
+      margin: 0;
+      padding: 0;
       color: black; 
       font-family: Molengo,Helvetica,Arial; 
       font-size: 11pt;
@@ -34,7 +39,15 @@
       div#logo { 
       float: left; 
       width: 70px; 
+      margin-top: 10px;
+      margin-left: 10px;
       border: 1px solid black;
+      }
+
+      span.anchor {
+      display: block;
+      height: 40px;
+      margin-top: -40px;
       }
 
       nav {
@@ -42,12 +55,26 @@
       }
 
       nav ul {
-      margin: 0; 
-      padding: 20px 0 0 0;
+      margin: 0 4pt; 
+      padding: 10pt 0;
       }
 
       nav li {
       list-style-type: none;
+      margin: 1em 0 1em 0;
+      padding: 2pt;
+      text-align: center;
+      font-size: 14pt;
+      }
+
+      nav li a {
+      font-family: Oregano,Helvetica,Arial; 
+      color: #363;
+      text-decoration: none;
+      }
+
+      nav li a:hover {
+      text-decoration: underline;
       }
 
       #introduction p { font-family: Oregano, cursive; font-size: 20pt; margin-top: 3pt; }
@@ -69,12 +96,15 @@
       text-shadow: 1px 1px 6px #ddd;
       }
 
+      #main {
+      padding-bottom: 40px;
+      margin-top: 50px;
+      margin-left: 100px;
+      }
+
       #content {
       float: left;
-      border-left: 1px solid grey;
-      padding-bottom: 40px;
       box-shadow: -4px 4px 7px #aa8; 
-      margin-left: 100px;
       }
 
       section { 
@@ -90,18 +120,22 @@
       }
 
       aside { 
-      background: #4f4; 
-      margin: 10pt 0 30pt 0;
+      background: #6c6; 
+      margin: 10pt 0 30pt 10px;
       font-size: 80%; 
       padding: 6pt 10pt 10pt 10pt; 
       box-shadow: 6px 6px 17px #aa8; 
       text-align: justify;
       }
 
+      aside h1, aside h2 {
+      text-shadow: 1px 1px 6px #4a4;
+      }
+
       aside h2 { font-size: 14pt; }
 
       svg { border: 0px dotted black }
-      div#logo svg { border: none }
+      div#logo svg { border: none; }
       div#status { margin-left: 40pt; float: left }
       dl.callouts dt { float: left; }
       dl.callouts dd { font-size: 80%; padding-bottom: 4pt; margin-left: 16pt }
@@ -138,15 +172,32 @@
       font-weight: bold;
       }
 
-      #banner {
-      background: #ff4;
-      opacity: 1;
-      margin-bottom: 20px;
+      div#banner {
       min-height: 40px;
-      box-shadow: 6px 6px 17px #aa8; 
+      background: rgba(0,0,0,0.8);
+      opacity: 5;
+      margin: 0;
+      padding: 0;
+      top: 0;
+      width: 100%;
+      }
+      
+      div#banner h1 {
+      color: #ccc;
+      margin: 0 0 0 0.5em;
+      padding: 0;
       }
 
-      #banner p {
+      #alert {
+      background: #ff4;
+      opacity: 0.8;
+      margin: 50px 20px 20px 120px;
+      min-height: 40px;
+      box-shadow: 6px 6px 17px #aa8; 
+      float: left;
+      }
+
+      #alert p {
       padding: 2pt;
       margin: 2pt;
       color: black;
@@ -167,30 +218,37 @@
       text-align: right;
       border-top: 1px solid #aaa;
       padding-top: 2pt 2pt 2pt 0pt;
-      margin: 0px 10px 10px 0px;
+      margin: 40px 10px 10px 0px;
+      }
+      figcaption {
+      margin: 4pt;
       }
     </style>  
   </head>
   <body>
 
     <script>
-      show_banner = function() {
-      document.querySelector("#banner").classList.remove("hidden");
+      show_alert = function() {
+      document.querySelector("#alert").classList.remove("hidden");
       }
-      hide_banner = function() {
-      document.querySelector("#banner").classList.add("hidden");
+      hide_alert = function() {
+      document.querySelector("#alert").classList.add("hidden");
       }
     </script>
 
-    <div id=banner class=hidden>
+    <div id=banner class=fixed>
+      <h1>Liberator</h1>
+    </div>
+
+    <div id="alert" class=hidden>
       <p>Just to let you know, this is an <span style="color: red; font-style: italic">unofficial</span> version of the Liberator site. The official version is
         at <a href="http://clojure-liberator.github.com/">http://clojure-liberator.github.com/</a>. </p>
-      <p style="font-size: smaller"><a href="javascript:hide_banner()">Hide</a></p>
+      <p style="font-size: smaller"><a href="javascript:hide_alert()">Hide</a></p>
     </div>
 
     <script>
       if (location.hostname != "clojure-liberator.github.com") {
-      show_banner();
+      show_alert();
       }
     </script>
 
@@ -240,23 +298,25 @@
         </g>
       </svg>
     </div>
+
     <nav>
       <ul>
-        <li><a href="#top">Top</a>
+        <li><a href="#introduction">Intro</a>
         <li><a href="#flowchart">Flowchart</a>
         <li><a href="#functions">Functions</a>
-        <li><a href="#gettingstarted">Get started</a>
+        <li><a href="#getting-started">Get started</a>
         <li><a href="#community">Community</a>
         <li><a href="#faq">FAQ</a>
-        <li><a href="http://clojure-liberator.github.com/">Github</a>
+        <li><a href="https://github.com/clojure-liberator/liberator">Github</a>
       </ul>
     </nav>
     </div>
 
+    <div id=main>
     <div id=content>
-      <a name="top"/>
 
-      <section id=introduction>
+      <span class="anchor" id="introduction"></span>
+      <section>
         <h1 id=title>Liberator</h1>
 
         <p id=description>Liberator is a free, open-source web library for the Clojure programming language with an emphasis on <abbr title="Representational State Transfer">REST</abbr>. 
@@ -276,7 +336,8 @@
 
       </section>
 
-      <section id=status>
+      <span class="anchor" id="status"></span>
+      <section>
         <h2>Status</h2>
         <p>Latest version: <a href="https://clojars.org/liberator">0.5.0</a>
       </section>
@@ -408,8 +469,8 @@
 
       </section>
 
+      <span class="anchor" id="works"></span>
       <section>
-        <a name=works/>
         <h2>How it works</h2>
 
         <p>Liberator works by using a <b>decision tree</b> to determine how to
@@ -724,8 +785,8 @@
           
       </section>
 
+      <span class="anchor" id="flowchart"></span>
       <section>
-        <a name="flowchart"/>
         <h2>Understanding the flowchart</h2>
 
         <p>Decisions are made according to a flowchart which determines
@@ -758,8 +819,8 @@
               created by Alan Dean for webmachine</a>. We have made a few small changes to the naming of decisions (so that they can be represented by Clojure keys) and to include the side-effecting <tt>post!</tt>, <tt>put!</tt> and <tt>delete!</tt> actions.</small>
       </section>
 
+      <span class="anchor" id="functions"></span>
       <section>
-        <a name="functions"/>
         <h2>Replacing functions</h2>
 
         <h3>The context argument</h3>
@@ -912,8 +973,8 @@
 
       </section>
 
-      <section id=getting-started>
-        <a name="gettingstarted"/>
+      <span class="anchor" id="getting-started"></span>
+      <section>
         <h2>Getting started</h2>
 
         <p>For this bit, please use <a href="http://leiningen.org">leiningen 2</a>.</p>
@@ -937,7 +998,7 @@
           <pre>REPL> <kbd>(use 'liberator.core)</kbd></pre>
 
           <h3>Running the examples</h3>
-
+          
         <p>A set of examples is included. If you want to see the examples in a browser, run
 
           <pre>> <kbd>lein examples</kbd></pre>
@@ -968,26 +1029,28 @@ user> <kbd>(examples.server/-main)</kbd></pre>
         <pre>
 (<span class="clojure symbol">defn</span> assemble-routes []
   (<span class="clojure symbol">routes</span>
-    <span class="code highlight">(<span class="clojure symbol">ANY</span> <span class="clojure string">"/my-example"</span> [] (<span class="clojure symbol">resource</span>     <span class="clojure keyword">:handle-ok</span> <span class="clojure string">"My example..."</span>))</span>
+    <span class="code highlight">(<span class="clojure symbol">ANY</span> <span class="clojure string">"/my-example"</span> [] (<span class="clojure symbol">resource</span> <span class="clojure keyword">:handle-ok</span> <span class="clojure string">"My example..."</span>))</span>
     (<span class="clojure symbol">ANY</span> <span class="clojure string">"/hello-world"</span> [] <span class="clojure symbol">hello-world</span>)
     ...
   ))</pre>
         
       </section>
 
-      <section id=nextsteps>
+      <span class="anchor" id="nextsteps"></span>
+      <section>
         <h2>Next steps</h2>
         <p>You should run the examples and look at the source code in the <tt>examples/</tt> directory to find out how they work.</p>
       </section>
 
-      <section id=community>
-        <a name=community/>
+      <span class="anchor" id="community"></span>
+      <section>
         <h2>Community</h2>
         <p>If you get stuck and need some help, or just want to hang-out with others who are hacking with and on Liberator, then please join our <a href="http://groups.google.com/group/clojure-liberator">clojure-liberator</a> Google group.</p>
 
       </section>
 
-      <section id=contribute>
+      <span class="anchor" id="contribute"></span>
+      <section>
         <h2>How to contribute to Liberator</h2>
 
         <p>We would welcome some help with Liberator. Especially with
@@ -1010,8 +1073,8 @@ user> <kbd>(examples.server/-main)</kbd></pre>
 
       </section>
 
-      <section id=faq>
-        <a name=faq/>
+      <span class="anchor" id="faq"></span>
+      <section>
         <h2>F.A.Q.</h2>
 
         <dl class="faq">
@@ -1051,7 +1114,7 @@ user> <kbd>(examples.server/-main)</kbd></pre>
         </dl>
       </section>
 
-
+      <span class="anchor" id="credits"></span>
       <section>
         <h2>Credits</h2>
 
@@ -1101,6 +1164,7 @@ user> <kbd>(examples.server/-main)</kbd></pre>
           onto your application stack.
       </aside>
 
+      </div>
     </div>
 
     <footer>
