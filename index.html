@@ -155,7 +155,7 @@
       color: #2c2 
       }
       .clojure.symbol { color: #2c2; font-weight: bold }
-      .clojure.keyword { color: pink; font-weight: normal }
+      .clojure.keyword { color: #8cc; font-weight: normal }
       .clojure.string { color: orange; font-weight: normal; font-size: 80% }
       .code.highlight { background: #300 }
       table {
@@ -371,13 +371,13 @@
         <p>You connect a Liberator resource to a route. For example,
           if you use Compojure as your routing library, you would connect things like this :-
 
-          <pre><code>(<span class="clojure symbol">ns</span> com.acme
-  (<span class="clojure symbol">require</span> 
-    [compojure.core <span class="clojure keyword">:as</span> compojure]
-    [liberator.core <span class="clojure keyword">:as</span> liberator]))
+          <pre><code>(<span class="clojure symbol">ns</span> <span class="clojure symbol">com.acme</span>
+  (<span class="clojure keyword">:use</span> 
+    [<span class="clojure symbol">compojure.core</span> <span class="clojure keyword">:only</span> [<span class="clojure symbol">ANY</span>]]
+    [<span class="clojure symbol">liberator.core</span> <span class="clojure keyword">:only</span> [<span class="clojure symbol">resource</span>]]))
 
-(<span class="clojure symbol">compojure/ANY</span> <span class="clojure string">"/products/:sku"</span> [sku]
-(<span class="clojure symbol">liberator/resource</span> &#9312;)</code></pre>
+(<span class="clojure symbol">ANY</span> <span class="clojure string">"/products/:sku"</span> [sku]
+  <span class="code highlight">(<span class="clojure symbol">resource</span> &#9312;)</span></code></pre>
 
           <dl class="callouts">
             <dt>&#9312;
@@ -747,7 +747,7 @@
           <pre><code>(<span class="clojure symbol">compojure/ANY</span> <span class="clojure string">"/products/:sku"</span> [sku]
   (<span class="clojure symbol">liberator/resource</span>
     <span class="clojure keyword">:handle-not-found</span> (<span class="clojure symbol">fn</span>&#9312; [ctx&#9313;]
-                        (<span class="clojure symbol">str</span> <span class="clojure string">"No such product: "</span> sku)&#9314;))</code></pre>
+                        (<span class="clojure symbol">str</span> <span class="clojure string">"No such product: "</span> sku)&#9314;)))</code></pre>
 
           <dl class=callouts>
             <dt>&#9312;
@@ -775,8 +775,8 @@
 
           <pre><code>(<span class="clojure symbol">compojure/ANY</span> <span class="clojure string">"/products/:sku"</span> [sku]
   (<span class="clojure symbol">liberator/resource</span>
-    <span class="clojure keyword">:handle-not-found</span> (<span class="clojure symbol">fn</span> [ctx] (<span class="clojure symbol">str</span> <span class="clojure string">"No such product: "</span> sku)))
-    <span class="code highlight"><span class="clojure keyword">:available-media-types</span> [<span class="clojure string">"text/html"</span> <span class="clojure string">"text/plain;q=0.8"</span>]</span>&#9312;)</code></pre>
+    <span class="clojure keyword">:handle-not-found</span> (<span class="clojure symbol">fn</span> [ctx] (<span class="clojure symbol">str</span> <span class="clojure string">"No such product: "</span> sku))
+    <span class="code highlight"><span class="clojure keyword">:available-media-types</span> [<span class="clojure string">"text/html"</span> <span class="clojure string">"text/plain;q=0.8"</span>]</span>&#9312;))</code></pre>
 
           <dl class=callouts>
             <dt>&#9312;
